@@ -52,28 +52,58 @@ def binarizar(nbites, datos):
     return binary_repr_v(datos, nbites)
 
 
+import numpy as np
+
+
 def bin_to_dec(datos):
     """
-    Convierte un numero binario representado con cadenas de texto a un numero decimal entero
+    Convierte números binarios representados como cadenas de texto a su correspondiente número decimal entero.
 
-    Parametros de entrada:
-    - datos (string): los numeros en binario que seran convertidos a su representacion decimal
+    Parámetros de entrada:
+    - datos (string, list o numpy.ndarray): Si es una cadena, debe ser un número binario representado como texto.
+    Si es una lista, debe contener números binarios como cadenas.
 
     Retorna:
-    - numpy array : Arreglo de numeros enteros decimales
+    - numpy array: Arreglo de números enteros decimales correspondientes a los valores binarios.
+    Si se proporciona una sola cadena binaria, se devuelve un único número decimal.
     """
-
-    datos_dec = []
-
-    return
+    # Verificar si 'datos' es un numpy.ndarray, lista o cadena
+    if isinstance(datos, np.ndarray) or isinstance(datos, list):
+        # Convertir cada número binario a su representación decimal
+        poblacion_dec = [int(i, 2) for i in datos]
+        return np.array(poblacion_dec)
+    elif isinstance(datos, str):
+        # Convertir la cadena binaria individual a decimal
+        return int(datos, 2)
+    else:
+        raise ValueError(
+            f"El parámetro 'datos' debe ser una cadena o una lista de cadenas. y no {type(datos)}"
+        )
 
 
 import numpy as np
 
 
+def get_espacio_matriz(espacio, normal, binario):
+    """
+    Funcion que retorna en una matriz el espacio de busqueda con los valores reales, los valores normalizados y los valores en binarios
+
+    Parametros:
+        espacio (np array): es el conjunto solucion original
+        normal (numpy array): es el conjunto solucion normalizado
+        binario (numpy array): es el conjunto solucion codificado a binario
+
+    Retorna:
+        espacio_matriz (numpy 2d array): retorna en una sola matriz los parametros, el orden de columnas es: espacio, normal, binario
+    """
+
+    espacio_matriz = np.column_stack((espacio, normal, binario))
+    return espacio_matriz
+
+
 def generar_poblacion(datos, ndatos):
     """
-    Genera una población seleccionando aleatoriamente un subconjunto de elementos de los datos originales.
+    Genera una población seleccionando aleatoriamente un subconjunto de elementos de los datos originales, devuelve tanto los datos seleccionados como sus índices correspondientes.
 
     Parámetros:
     - datos (iterable o numpy array): Conjunto de datos del cual se seleccionarán elementos.
@@ -85,6 +115,10 @@ def generar_poblacion(datos, ndatos):
 
     n = len(datos)
     indices = np.random.choice(range(n), ndatos, replace=False)
-    poblacion = np.array([datos[i] for i in indices])
 
+    poblacion = np.zeros((ndatos, 2), dtype=object)
+
+    poblacion[:, 0] = indices
+    poblacion[:, 1] = [datos[i] for i in indices]
+    # poblacion = np.column_stack((indices, [datos[i] for i in indices]))
     return poblacion
