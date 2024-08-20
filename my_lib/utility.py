@@ -47,7 +47,8 @@ def binarizar(nbites, datos):
     Retorna:
     - numpy string array: Arreglo de cadenas que representan los números en formato binario, donde cada número está ajustado a `nbites` bits.
     """
-    datos = datos.astype(np.int64)
+    datos = np.rint(datos).astype(np.int64)
+    # datos = datos.astype(np.int64)
     binary_repr_v = np.vectorize(np.binary_repr)
     return binary_repr_v(datos, nbites)
 
@@ -103,7 +104,7 @@ def get_espacio_matriz(espacio, normal, binario):
 
 def generar_poblacion(datos, ndatos):
     """
-    Genera una población seleccionando aleatoriamente un subconjunto de elementos de los datos originales, devuelve tanto los datos seleccionados como sus índices correspondientes.
+    Genera una población seleccionando aleatoriamente un subconjunto de elementos de los datos originales, devuelve el subconjunto.
 
     Parámetros:
     - datos (iterable o numpy array): Conjunto de datos del cual se seleccionarán elementos.
@@ -116,9 +117,61 @@ def generar_poblacion(datos, ndatos):
     n = len(datos)
     indices = np.random.choice(range(n), ndatos, replace=False)
 
-    poblacion = np.zeros((ndatos, 2), dtype=object)
+    poblacion = np.zeros((ndatos, datos.shape[1]), dtype=object)
 
-    poblacion[:, 0] = indices
-    poblacion[:, 1] = [datos[i] for i in indices]
-    # poblacion = np.column_stack((indices, [datos[i] for i in indices]))
+    poblacion[:, 0] = [datos[i, 0] for i in indices]
+    poblacion[:, 1] = [datos[i, 1] for i in indices]
+    poblacion[:, 2] = [datos[i, 2] for i in indices]
+    poblacion[:, 3] = [datos[i, 3] for i in indices]
+
     return poblacion
+
+
+def ordenar_poblacion(poblacion):
+    pob_ord = poblacion.copy()
+
+    n = len(pob_ord)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            actual = pob_ord[j, 3]
+            prox = pob_ord[j + 1, 3]
+
+            if actual < prox:
+                aux = pob_ord[j].copy()
+                pob_ord[j] = pob_ord[j + 1].copy()
+                pob_ord[j + 1] = aux.copy()
+
+    return pob_ord
+
+
+def cruzar_individuos(pob, espacio):
+    n = len(pob)
+    n_cromos = len(pob[0, 2])
+
+    nueva_pob = pob.copy()
+
+    for i in range(0, n, 2):
+        padre = pob[i, 2]
+        madre = pob[i + 1, 2]
+
+        cromos_p = np.array([padre[: int(n_cromos / 2)], padre[-int(n_cromos / 2) :]])
+        cromos_m = np.array([madre[: int(n_cromos / 2)], madre[-int(n_cromos / 2) :]])
+
+        aux_1 = f"{cromos_p[0]}{cromos_m[0]}"
+        aux_2 = f"{cromos_m[0]}{cromos_p[0]}"
+
+        hijo_1 = buscar_individuo(espacio, aux_1)
+        hijo_2 = buscar_individuo(espacio, aux_2)
+        nueva_pob = np.vstack([nueva_pob, hijo_1])
+        nueva_pob = np.vstack([nueva_pob, hijo_2])
+
+    return nueva_pob
+
+
+def buscar_individuo(espacio, individuo, columna=2):
+    n = len(espacio)
+    for i in range(n):
+        if individuo == espacio[i, columna]:
+            return espacio[i]
+    print(individuo)
+    return None
