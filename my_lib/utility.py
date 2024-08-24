@@ -144,7 +144,7 @@ def ordenar_poblacion(poblacion):
     return pob_ord
 
 
-def cruzar_individuos(pob, espacio):
+def cruzar_individuos(pob, espacio,p=0,m=1):
     n = len(pob)
     n_cromos = len(pob[0, 2])
 
@@ -157,8 +157,8 @@ def cruzar_individuos(pob, espacio):
         cromos_p = np.array([padre[: int(n_cromos / 2)], padre[-int(n_cromos / 2) :]])
         cromos_m = np.array([madre[: int(n_cromos / 2)], madre[-int(n_cromos / 2) :]])
 
-        aux_1 = f"{cromos_p[0]}{cromos_m[0]}"
-        aux_2 = f"{cromos_m[0]}{cromos_p[0]}"
+        aux_1 = f"{cromos_p[p]}{cromos_m[m]}"
+        aux_2 = f"{cromos_m[m]}{cromos_p[p]}"
 
         hijo_1 = buscar_individuo(espacio, aux_1)
         hijo_2 = buscar_individuo(espacio, aux_2)
