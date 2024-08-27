@@ -144,7 +144,7 @@ def ordenar_poblacion(poblacion):
     return pob_ord
 
 
-def cruzar_individuos(pob, espacio,p=0,m=1):
+def cruzar_individuos(pob, espacio, p=0, m=1):
     n = len(pob)
     n_cromos = len(pob[0, 2])
 
@@ -176,3 +176,39 @@ def buscar_individuo(espacio, individuo, columna=2):
     print(individuo)
     return None
 
+
+def seleccion_ruleta(poblacion):
+    # Valores unicos
+    _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
+    indiv_unicos = poblacion[indices_unicos]
+
+    # Ordenar por aptitud
+    indiv_unicos = ordenar_poblacion(poblacion)
+
+    # Aptitud total
+    apt_total = np.sum(indiv_unicos[:, 3])
+    # Probabilidad por aptitud
+    prob_apt = indiv_unicos[:, 3] / apt_total
+    # Probabilidad acumulada
+    prob_acum = np.cumsum(prob_apt)
+
+    indices = np.searchsorted(prob_acum, np.random.rand(2))
+    return indiv_unicos[indices]
+
+
+def cruce_un_corte(padres):
+    n_genes = len(padres[0, 2])
+    p1 = padres[0, 2]
+    p2 = padres[1, 2]
+
+    cromos_p1 = np.array([p1[: int(n_genes / 2)], p1[-int(n_genes / 2) :]])
+    cromos_p2 = np.array([p2[: int(n_genes / 2)], p2[-int(n_genes / 2) :]])
+
+    h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
+    h2 = f"{cromos_p1[0]}{cromos_p2[1]}"
+
+
+def seleccionar_padres(pob_tam, poblacion, espacio):
+    for i in range(pob_tam):
+        padres = seleccion_ruleta(poblacion)
+        cruce_un_corte(padres)
