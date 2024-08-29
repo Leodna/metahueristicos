@@ -177,6 +177,18 @@ def buscar_individuo(espacio, individuo, columna=2):
     return None
 
 
+def buscar_hijos(hijos, espacio, columna=2):
+    hijos_esp = []
+    hijos_ind = [i[0] for i in hijos]
+    hijos_ind = np.array(hijos_ind)
+
+    for i, hijo in enumerate(hijos_ind):
+        indice = np.where(espacio[:, columna] == hijo)
+        indice = indice[0][0]
+        hijos_esp.append(espacio[indice, :])
+    return np.array(hijos_esp)
+
+
 def seleccion_ruleta(poblacion):
     # Valores unicos
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
@@ -207,8 +219,17 @@ def cruce_un_corte(padres):
     h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
     h2 = f"{cromos_p1[0]}{cromos_p2[1]}"
 
+    return h1, h2
 
-def seleccionar_padres(pob_tam, poblacion, espacio):
+
+def seleccionar_padres(pob_tam, poblacion):
+    descendencia = []
     for i in range(pob_tam):
         padres = seleccion_ruleta(poblacion)
         cruce_un_corte(padres)
+        h1, h2 = cruce_un_corte(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
