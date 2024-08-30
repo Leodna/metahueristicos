@@ -189,7 +189,17 @@ def buscar_hijos(hijos, espacio, columna=2):
     return np.array(hijos_esp)
 
 
-def seleccion_ruleta(poblacion):
+def torneo(T):
+    k = len(T)
+    ganador = T[0]
+    for i in range(1, k):
+        print(ganador)
+
+
+# def seleccion_torneo(pob,k,n=1):
+
+
+def seleccion_ruleta(poblacion, n=2):
     # Valores unicos
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
     indiv_unicos = poblacion[indices_unicos]
@@ -204,7 +214,7 @@ def seleccion_ruleta(poblacion):
     # Probabilidad acumulada
     prob_acum = np.cumsum(prob_apt)
 
-    indices = np.searchsorted(prob_acum, np.random.rand(2))
+    indices = np.searchsorted(prob_acum, np.random.rand(n))
     return indiv_unicos[indices]
 
 
