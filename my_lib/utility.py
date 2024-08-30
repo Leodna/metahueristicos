@@ -175,3 +175,4 @@ def buscar_individuo(espacio, individuo, columna=2):
             return espacio[i]
     print(individuo)
     return None
+
