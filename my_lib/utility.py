@@ -144,28 +144,28 @@ def ordenar_poblacion(poblacion):
     return pob_ord
 
 
-def cruzar_individuos(pob, espacio, p=0, m=1):
-    n = len(pob)
-    n_cromos = len(pob[0, 2])
+# def cruzar_individuos(pob, espacio, p=0, m=1):
+#     n = len(pob)
+#     n_cromos = len(pob[0, 2])
 
-    nueva_pob = pob.copy()
+#     nueva_pob = pob.copy()
 
-    for i in range(0, n, 2):
-        padre = pob[i, 2]
-        madre = pob[i + 1, 2]
+#     for i in range(0, n, 2):
+#         padre = pob[i, 2]
+#         madre = pob[i + 1, 2]
 
-        cromos_p = np.array([padre[: int(n_cromos / 2)], padre[-int(n_cromos / 2) :]])
-        cromos_m = np.array([madre[: int(n_cromos / 2)], madre[-int(n_cromos / 2) :]])
+#         cromos_p = np.array([padre[: int(n_cromos / 2)], padre[-int(n_cromos / 2) :]])
+#         cromos_m = np.array([madre[: int(n_cromos / 2)], madre[-int(n_cromos / 2) :]])
 
-        aux_1 = f"{cromos_p[p]}{cromos_m[m]}"
-        aux_2 = f"{cromos_m[m]}{cromos_p[p]}"
+#         aux_1 = f"{cromos_p[p]}{cromos_m[m]}"
+#         aux_2 = f"{cromos_m[m]}{cromos_p[p]}"
 
-        hijo_1 = buscar_individuo(espacio, aux_1)
-        hijo_2 = buscar_individuo(espacio, aux_2)
-        nueva_pob = np.vstack([nueva_pob, hijo_1])
-        nueva_pob = np.vstack([nueva_pob, hijo_2])
+#         hijo_1 = buscar_individuo(espacio, aux_1)
+#         hijo_2 = buscar_individuo(espacio, aux_2)
+#         nueva_pob = np.vstack([nueva_pob, hijo_1])
+#         nueva_pob = np.vstack([nueva_pob, hijo_2])
 
-    return nueva_pob
+#     return nueva_pob
 
 
 def buscar_individuo(espacio, individuo, columna=2):
@@ -199,7 +199,7 @@ def torneo(T):
 # def seleccion_torneo(pob,k,n=1):
 
 
-def seleccion_ruleta(poblacion, n=2):
+def ruleta(poblacion, n=2):
     # Valores unicos
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
     indiv_unicos = poblacion[indices_unicos]
@@ -232,14 +232,80 @@ def cruce_un_corte(padres):
     return h1, h2
 
 
-def seleccionar_padres(pob_tam, poblacion):
+def seleccion_ruleta(pob_tam, poblacion, op_cruza=0):
     descendencia = []
     for i in range(pob_tam):
-        padres = seleccion_ruleta(poblacion)
-        cruce_un_corte(padres)
-        h1, h2 = cruce_un_corte(padres)
+        padres = ruleta(poblacion)
+
+        if op_cruza == 0:
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # TO-DO implementar cruza 2 cortes
+            print("cruza 2 cortes")
+        else:
+            # TO-DO implementar cruza homogenica
+            print("pirnt cruza homogenica")
 
         descendencia.append([h1, padres[:, 2]])
         descendencia.append([h2, padres[:, 2]])
 
     return descendencia
+
+
+def selecion_rank(poblacion, op_cruza=0):
+    n = len(poblacion)
+    descendencia = []
+    for i in range(0, n, 2):
+        padres = np.vstack([poblacion[i], poblacion[i + 1]])
+
+        if op_cruza == 0:
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # TO-DO implementar cruza 2 cortes
+            print("cruza 2 cortes")
+        else:
+            # TO-DO implementar cruza homogenica
+            print("pirnt cruza homogenica")
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
+
+
+def get_next_gen(poblacion, op_seleccion, op_cruza=0):
+    if op_seleccion == 0:
+        # Seleccion por ruelta
+        # Numero de parajas a reproducir
+        n = int(len(poblacion) / 2)
+        return seleccion_ruleta(n, poblacion, op_cruza=op_cruza)
+    elif op_seleccion == 1:
+        # TO-DO implementar todo el metodo de selección aleatoria
+        # monogamica
+        return None
+    elif op_seleccion == 2:
+        # TO-DO implementar todo el metodo de selección aleatoria
+        # poligamica
+        return None
+    elif op_seleccion == 3:
+        # Selección por ranking
+        return selecion_rank(poblacion, op_cruza=op_cruza)
+    else:
+        # TO-DO implementar todo el metodo de selección por
+        # Torneo
+        return None
+
+
+def paro_epsilon(pob, umb=0.8, prctg=0.8):
+    tam_pob = len(pob)  # 100%
+    paro = tam_pob * prctg  # Porcentaje de pob para parar
+    count = 0  # Num de ind que son aptos
+
+    for ind in pob:
+        if ind[3] >= umb:  # Determinar si un ind es apto
+            count += 1
+
+    if count >= paro:  # Paro si hay individuos aptos
+        return True
+
+    return False
