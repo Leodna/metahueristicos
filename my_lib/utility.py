@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 
 def normalizar(data, a=0, b=1):
@@ -189,6 +190,9 @@ def buscar_hijos(hijos, espacio, columna=2):
     return np.array(hijos_esp)
 
 
+"""OPERADORES DE SELECCIÓN"""
+
+
 def torneo(T):
     k = len(T)
     ganador = T[0]
@@ -213,9 +217,109 @@ def ruleta(poblacion, n=2):
     prob_apt = indiv_unicos[:, 3] / apt_total
     # Probabilidad acumulada
     prob_acum = np.cumsum(prob_apt)
-
     indices = np.searchsorted(prob_acum, np.random.rand(n))
     return indiv_unicos[indices]
+
+
+def seleccion_ruleta(pob_tam, poblacion, op_cruza=0):
+    descendencia = []
+    for i in range(pob_tam):
+        padres = ruleta(poblacion)
+
+        if op_cruza == 0:
+            # Cruza un corte
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # cruza 2 cortes
+            h1, h2 = cruce_dos_corte(padres)
+        else:
+            # cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
+
+
+def seleccion_monogamica(poblacion, op_cruza=0):
+    # número total de individuos de la poblacion
+    n = len(poblacion)
+    # ordenar de forma aleatoria la poblacion
+    pob = poblacion.copy()
+    np.random.shuffle(pob)
+    # lista para almacenar los hijos de cada padre
+    descendencia = []
+    for i in range(0, n, 2):
+        padres = np.vstack([pob[i], pob[i + 1]])
+
+        if op_cruza == 0:
+            # Cruza un corte
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # Cruza 2 cortes
+            h1, h2 = cruce_dos_corte(padres)
+        else:
+            # Cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
+
+
+def seleccion_poligamica(poblacion, op_cruza=0):
+    # número total de inidividuos
+    n = len(poblacion)
+    # número de cruces para pasar genes
+    n_cruces = int(n / 2)
+
+    for i in range(n_cruces):
+        # selección de índices consecutivos para un par de padres y asegura que no se repita la selección
+        p1 = random.randint(0, n)
+        p2 = random.randint(0, n)
+        padres = np.vstack([poblacion[p1], poblacion[p2]])
+
+        if op_cruza == 0:
+            # Cruza un corte
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # cruza 2 cortes
+            h1, h2 = cruce_dos_corte(padres)
+        else:
+            # cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
+
+
+def seleccion_rank(poblacion, op_cruza=0):
+    n = len(poblacion)
+    descendencia = []
+    for i in range(0, n, 2):
+        padres = np.vstack([poblacion[i], poblacion[i + 1]])
+
+        if op_cruza == 0:
+            # Cruza un corte
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # cruza 2 cortes
+            h1, h2 = cruce_dos_corte(padres)
+        else:
+            # cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
+
+
+"""OPERADORES DE CRUCE"""
 
 
 def cruce_un_corte(padres):
@@ -251,45 +355,30 @@ def cruce_dos_corte(padres):
     return h1, h2
 
 
-def seleccion_ruleta(pob_tam, poblacion, op_cruza=0):
-    descendencia = []
-    for i in range(pob_tam):
-        padres = ruleta(poblacion)
+def cruce_homogenea(padres):
+    n_cromos = len(padres[0, 2])
+    p1 = padres[0, 2]
+    p2 = padres[1, 2]
 
-        if op_cruza == 0:
-            h1, h2 = cruce_un_corte(padres)
-        elif op_cruza == 1:
-            # TO-DO implementar cruza 2 cortes
-            print("cruza 2 cortes")
+    h1 = []
+    h2 = []
+
+    for i in range(n_cromos):
+        # selecciona de forma aleatoria de que padre/madre proviene el bit para cada hijo
+        if random.random() < 0.5:
+            h1.append(p1[i])
+            h2.append(p2[i])
         else:
-            # TO-DO implementar cruza homogenica
-            print("pirnt cruza homogenica")
+            h1.append(p2[i])
+            h2.append(p1[i])
 
-        descendencia.append([h1, padres[:, 2]])
-        descendencia.append([h2, padres[:, 2]])
+    # Convertir las listas de bits a cadenas
+    h1 = "".join(h1)
+    h2 = "".join(h2)
+    return h1, h2
 
-    return descendencia
 
-
-def selecion_rank(poblacion, op_cruza=0):
-    n = len(poblacion)
-    descendencia = []
-    for i in range(0, n, 2):
-        padres = np.vstack([poblacion[i], poblacion[i + 1]])
-
-        if op_cruza == 0:
-            h1, h2 = cruce_un_corte(padres)
-        elif op_cruza == 1:
-            # TO-DO implementar cruza 2 cortes
-            print("cruza 2 cortes")
-        else:
-            # TO-DO implementar cruza homogenica
-            print("pirnt cruza homogenica")
-
-        descendencia.append([h1, padres[:, 2]])
-        descendencia.append([h2, padres[:, 2]])
-
-    return descendencia
+"""OBTENER SIGUIENTE GENERACION"""
 
 
 def get_next_gen(poblacion, op_seleccion, op_cruza=0):
@@ -299,20 +388,46 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0):
         n = int(len(poblacion) / 2)
         return seleccion_ruleta(n, poblacion, op_cruza=op_cruza)
     elif op_seleccion == 1:
-        # TO-DO implementar todo el metodo de selección aleatoria
-        # monogamica
-        return None
+        # selección aleatoria monogamica
+        return seleccion_monogamica(poblacion, op_cruza=op_cruza)
     elif op_seleccion == 2:
-        # TO-DO implementar todo el metodo de selección aleatoria
-        # poligamica
-        return None
+        # selección aleatoria poligamica
+        return seleccion_poligamica(poblacion, op_cruza=op_cruza)
     elif op_seleccion == 3:
         # Selección por ranking
-        return selecion_rank(poblacion, op_cruza=op_cruza)
+        return seleccion_rank(poblacion, op_cruza=op_cruza)
     else:
         # TO-DO implementar todo el metodo de selección por
         # Torneo
         return None
+
+
+"""OPERADORES DE MUTACION"""
+
+
+def mutacion(individuo):
+    """
+    Mutación que cambia un bit aleatorio de cada individuo,
+    cambiando el 0 por 1.
+    """
+    # convertir el individuo binario a una lista de bits
+    bits = list(individuo)
+    # seleccionar un índice aleatorio para mutar
+    index = random.randint(0, 5)
+
+    # mutar el bit en el índice seleccionado
+    if bits[index] == "0":
+        bits[index] = "1"
+    else:
+        bits[index] = "0"
+
+    # convertir la lista de bits de vuelta a una cadena binaria
+    individuo_mutado = "".join(bits)
+
+    return individuo_mutado
+
+
+"""CRITERIOS DE PARO"""
 
 
 def paro_epsilon(pob, umb=0.8, prctg=0.8):
