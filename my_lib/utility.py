@@ -219,16 +219,35 @@ def ruleta(poblacion, n=2):
 
 
 def cruce_un_corte(padres):
-    n_genes = len(padres[0, 2])
+    n_cromos = len(padres[0, 2])
     p1 = padres[0, 2]
     p2 = padres[1, 2]
 
-    cromos_p1 = np.array([p1[: int(n_genes / 2)], p1[-int(n_genes / 2) :]])
-    cromos_p2 = np.array([p2[: int(n_genes / 2)], p2[-int(n_genes / 2) :]])
+    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[-int(n_cromos / 2) :]])
+    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[-int(n_cromos / 2) :]])
 
     h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
     h2 = f"{cromos_p1[0]}{cromos_p2[1]}"
 
+    return h1, h2
+
+
+def cruce_dos_corte(padres):
+    n_cromos = len(padres[0, 2])
+    p1 = padres[0, 2]
+    p2 = padres[1, 2]
+
+    # división de padre y madre en tre partes
+    ter1 = int(n_cromos / 3)
+    ter2 = ter1 * 2
+
+    cromos_p = np.array([p1[:ter1], p1[ter1:ter2], p1[ter2:]])
+
+    cromos_m = np.array([p2[:ter1], p2[ter1:ter2], p2[ter2:]])
+
+    h1 = f"{cromos_m[0]}{cromos_p[1]}{cromos_m[2]}"
+    h2 = f"{cromos_p[0]}{cromos_m[1]}{cromos_p[2]}"
+    # print([hijo1,hijo2])
     return h1, h2
 
 
