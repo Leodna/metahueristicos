@@ -430,7 +430,7 @@ def mutacion(individuo):
 """CRITERIOS DE PARO"""
 
 
-def paro_epsilon(pob, umb=0.8, prctg=0.8):
+def paro_epsilon_artesanal(pob, umb=0.8, prctg=0.8):
     tam_pob = len(pob)  # 100%
     paro = tam_pob * prctg  # Porcentaje de pob para parar
     count = 0  # Num de ind que son aptos
@@ -440,6 +440,41 @@ def paro_epsilon(pob, umb=0.8, prctg=0.8):
             count += 1
 
     if count >= paro:  # Paro si hay individuos aptos
+        return True
+
+    return False
+
+
+def paro_epsilon(pob, threshold=0.75, majority_th=0.8):
+    """
+    Parametros:
+    - pob: población de inidividuos
+    - threshold: umbral de la función de costo (default: 0.75)
+    - majority_th: proporción de la población que debe cumplir con el umbral (default: 0.8)
+    Retorna:
+    - True si se cumple la condición de paro, False en caso contrario
+    """
+
+    porporcion = np.mean(pob[:, 3] > threshold)
+    if porporcion >= majority_th:
+        return True
+
+    return False
+
+
+def paro_delta(pob, apt_prev, delta=1e-6):
+    """
+    Parametros:
+    - pob: población de individuos
+    - apt_prev: aptitud media de la población anterior
+    - delta: valor umbral para considerar la convergencia (default: 1e-6)
+
+    Retorna:
+    - la mejor solución encontrada
+    """
+    apt_mean = np.mean(pob[:, 3])
+
+    if abs(apt_mean - apt_prev) <= delta:
         return True
 
     return False
