@@ -71,4 +71,4 @@ Ahora estás listo para ejecutar los notebooks o scripts del proyecto. Abre Jupy
 
 ## 🤝 Colaboración
 
-Este proyecto es gestionado de manera colaborativa para fomentar el aprendizaje y la mejora continua. ¡Explora, contribuye y aprende con nosotras mientras aplicamos técnicas avanzadas de optimización!
+Este proyecto es gestionado de manera colaborativa para fomentar el aprendizaje y la mejora continua.
