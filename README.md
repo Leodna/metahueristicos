@@ -24,7 +24,7 @@ git clone https://github.com/Leodna/metahueristicos.git
 
 También puedes descargar el proyecto en un archivo comprimido .zip
 
-![Descargar zip del proyecto](files\readme\descarga_proy.png)
+![Descargar zip del proyecto]([files\readme\descarga_proy.png](https://github.com/Leodna/metahueristicos/blob/main/files/readme/descarga_proy.png))
 
 ### 2. 📂 Navegar al Directorio del Proyecto
 
