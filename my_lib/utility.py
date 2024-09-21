@@ -128,6 +128,18 @@ def generar_poblacion(datos, ndatos):
     return poblacion
 
 
+def generar_poblacion_perm(datos, ndatos, n_cromas=None):
+    if not n_cromas:
+        n_cromas = len(datos)
+
+    n = n_cromas
+    poblacion = np.zeros((ndatos, n))
+    for i in range(ndatos):
+        poblacion[i] = np.random.permutation(n)
+
+    return poblacion
+
+
 def ordenar_poblacion(poblacion):
     pob_ord = poblacion.copy()
 
