@@ -128,26 +128,32 @@ def generar_poblacion(datos, ndatos):
     return poblacion
 
 
-def generar_poblacion_perm(datos, ndatos, n_cromas=None):
+def generar_poblacion_perm(datos, tam_pob, n_cromas=None):
     if not n_cromas:
         n_cromas = len(datos)
 
     n = n_cromas
-    poblacion = np.zeros((ndatos, n))
-    for i in range(ndatos):
+    poblacion = np.zeros((tam_pob, n))
+    for i in range(tam_pob):
         poblacion[i] = np.random.permutation(n)
 
     return poblacion
 
 
-def ordenar_poblacion(poblacion):
+def individuo_toString(inviduo):
+    aux = np.array2string(inviduo, separator="")
+    aux = aux.strip("[]")
+    return aux
+
+
+def ordenar_poblacion(poblacion, apt_column=3):
     pob_ord = poblacion.copy()
 
     n = len(pob_ord)
     for i in range(n):
         for j in range(0, n - i - 1):
-            actual = pob_ord[j, 3]
-            prox = pob_ord[j + 1, 3]
+            actual = pob_ord[j, apt_column]
+            prox = pob_ord[j + 1, apt_column]
 
             if actual < prox:
                 aux = pob_ord[j].copy()
