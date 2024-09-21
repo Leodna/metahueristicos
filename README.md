@@ -24,7 +24,7 @@ git clone https://github.com/Leodna/metahueristicos.git
 
 También puedes descargar el proyecto en un archivo comprimido .zip
 
-![Descargar zip del proyecto](files\readme\descarga_proy.png)
+![Descargar zip del proyecto](https://github.com/Leodna/metahueristicos/blob/main/files/readme/descarga_proy.png)
 
 ### 2. 📂 Navegar al Directorio del Proyecto
 
@@ -71,4 +71,4 @@ Ahora estás listo para ejecutar los notebooks o scripts del proyecto. Abre Jupy
 
 ## 🤝 Colaboración
 
-Este proyecto es gestionado de manera colaborativa para fomentar el aprendizaje y la mejora continua. ¡Explora, contribuye y aprende con nosotras mientras aplicamos técnicas avanzadas de optimización!
+Este proyecto es gestionado de manera colaborativa para fomentar el aprendizaje y la mejora continua.
