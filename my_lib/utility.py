@@ -345,8 +345,10 @@ def cruce_un_corte(padres):
     p1 = padres[0, 2]
     p2 = padres[1, 2]
 
-    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[-int(n_cromos / 2) :]])
-    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[-int(n_cromos / 2) :]])
+    # cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[-int(n_cromos / 2) :]])
+    # cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[-int(n_cromos / 2) :]])
+    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[int(n_cromos / 2) :]])
+    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[int(n_cromos / 2) :]])
 
     h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
     h2 = f"{cromos_p1[0]}{cromos_p2[1]}"
