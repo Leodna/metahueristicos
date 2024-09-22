@@ -295,8 +295,8 @@ def seleccion_poligamica(poblacion, op_cruza=0):
     descendencia = []
     for i in range(n_cruces):
         # selección de índices consecutivos para un par de padres y asegura que no se repita la selección
-        p1 = random.randint(0, n)
-        p2 = random.randint(0, n)
+        p1 = np.random.randint(0, n)
+        p2 = np.random.randint(0, n)
         padres = np.vstack([poblacion[p1], poblacion[p2]])
 
         if op_cruza == 0:
