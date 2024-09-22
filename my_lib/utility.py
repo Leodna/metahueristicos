@@ -292,7 +292,7 @@ def seleccion_poligamica(poblacion, op_cruza=0):
     n = len(poblacion)
     # número de cruces para pasar genes
     n_cruces = int(n / 2)
-
+    descendencia = []
     for i in range(n_cruces):
         # selección de índices consecutivos para un par de padres y asegura que no se repita la selección
         p1 = random.randint(0, n)
