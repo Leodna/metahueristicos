@@ -398,6 +398,82 @@ def cruce_homogenea(padres):
     return h1, h2
 
 
+def cruce_pmx(padres, target_col=0):
+    """
+    Realiza una cruza PMX (cruza parcialmente mapeada) en dos cromosomas padres
+
+    Args:
+    padres (np.arraylist): Lista con los dos padres a cruzar
+    target_col(int): Indice de la columna en donde se encuentra el individiduo codificado, por defecto se toma la columna 0
+
+    Returns:
+    tupla (np.arraylist): Los dos hijos producto de PMX, en forma de np list
+    """
+    p1 = padres[0, 0]
+    p2 = padres[1, 0]
+
+    if len(p1) != len(p2):
+        raise Exception("Los padres no tienen la misma cantidad de cromosomas")
+
+    p1 = np.array(list(p1)).astype(int)
+    p2 = np.array(list(p2)).astype(int)
+
+    n_cromos = len(p2)
+
+    # Seleccionar puntos de corte aleatorios
+    xpt1, xpt2 = np.random.randint(1, n_cromos - 1, 2)
+
+    while xpt1 == xpt2:
+        xpt2 = np.random.randint(1, n_cromos - 1)
+
+    if xpt1 > xpt2:
+        xpt1, xpt2 = xpt2, xpt1
+    print(f"Padre1: {p1}")
+    print(f"Padre2: {p2}")
+    print(f"pt1 : {xpt1}")
+    print(f"pt2 : {xpt2}")
+
+    # Separar los cromosomas de los padres, por los pts de corte generados
+    cromos_p1 = [p1[:xpt1], p1[xpt1:xpt2], p1[xpt2:]]
+    cromos_p2 = [p2[:xpt1], p2[xpt1:xpt2], p2[xpt2:]]
+
+    # Matriz variabilidad
+    offspring = [cromos_p2[1], cromos_p1[1]]
+
+    # proto-hijos
+    proto_child1 = [cromos_p1[0], cromos_p2[1], cromos_p1[2]]
+    proto_child2 = [cromos_p2[0], cromos_p1[1], cromos_p2[2]]
+
+    print(f"proto-hijo1: {proto_child1}")
+    print(f"proto-hijo2: {proto_child2}")
+
+    for i, (child) in enumerate(zip([proto_child1, proto_child2])):
+        pchild = child[0]
+        for j in range(0, 3, 2):
+            segment = pchild[j]
+            for k in range(len(segment)):
+                cromosoma = segment[k]
+                while cromosoma in offspring[i]:
+                    cid = np.where(offspring[i] == cromosoma)[0]
+                    if cid.size > 0:
+                        cid = cid[0]
+                        print(
+                            f"El elemento '{cromosoma}' está en la posición: {cid} cambiando por {cromosoma} -> {offspring[i-1][cid]}"
+                        )
+                        cromosoma = offspring[i - 1][cid]
+
+                segment[k] = cromosoma
+
+            pchild[j] = segment
+
+    print(f"final-hijo1: {proto_child1}")
+    print(f"final-hijo2: {proto_child2}")
+
+    h1 = np.concatenate(proto_child1)
+    h2 = np.concatenate(proto_child2)
+    return h1, h2
+
+
 """OBTENER SIGUIENTE GENERACION"""
 
 
