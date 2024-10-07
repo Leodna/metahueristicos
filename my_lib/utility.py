@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import itertools
 
 
 def normalizar(data, a=0, b=1):
@@ -501,7 +502,138 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0):
 """OPERADORES DE MUTACION"""
 
 
-def mutacion(individuo):
+def mutation(
+    pob,
+    indiv_percent=10,
+    cromosomas_mutation=None,
+    opt=0,
+    operator=0,
+    funcion_aptitud=None,
+):
+    """
+    Aplica una mutación a una parte de la población original.
+
+    Parámetros:
+    pob (array): La población original que se va a mutar.
+    indiv_percent (int): El porcentaje de la población que se va a mutar. Debe ser un valor entre 0 y 10. (default: 10)
+    cromosomas_mutation (int): La cantidad de genes que se van a mutar en cada individuo. Si no se proporciona, se tomará la mitad de los cromosomas del individuo. (default: None)
+    opt (int): La opción para seleccionar los individuos a mutar. Puede ser 0 (aleatoriedad) o 1 (por aptitud). (default: 0)
+    operator (int): El operador de mutación a utilizar. (default: 0)
+
+    Descripción:
+    La función mutation aplica una mutación a una parte de la población original. Primero, se seleccionan los individuos a mutar según el porcentaje proporcionado y la opción seleccionada. Luego, se aplica la mutación a cada individuo seleccionado utilizando el operador de mutación especificado.
+
+    Validación de errores:
+    La función verifica que el porcentaje de la población a mutar sea mayor a 0 y menor o igual a 10. También verifica que la cantidad de genes a mutar no supere la mitad de los cromosomas del individuo.
+
+    Retorno:
+    La población resultante después de la mutación.
+
+    Notas:
+    * La función mutation modifica la población original, por lo que se recomienda trabajar con una copia de la población original si se desea preservar la población original.
+    """
+    # Validación de errores
+    tam_pob = pob.shape[0]
+    num_cromos = pob[0][0].shape[0]
+    indiv_percent = int(indiv_percent)
+
+    if indiv_percent <= 0 or indiv_percent > 10:
+        raise ValueError(
+            "El porcentaje de la población a mutar debe ser mayor a 0 y menor o igual a 10."
+        )
+
+    if not cromosomas_mutation:
+        cromosomas_mutation = num_cromos // 2
+    else:
+        cromosomas_mutation = int(cromosomas_mutation)
+        if cromosomas_mutation > (num_cromos // 2):
+            raise ValueError(
+                "La cantidad de genes a mutar no debe pasar la mitad de los cromosomas del individuo"
+            )
+
+    # Seleccionar individuos a mutar
+    indiv_percent /= 100
+    n = round(indiv_percent * tam_pob)
+    # opt=0 ----> ALEATORIEDAD
+    if opt == 0:
+        indices_mutation = np.random.choice(tam_pob, n, replace=False)
+
+    # opt=1 ----> Por aptitud
+    else:
+        pob = ordenar_poblacion(pob)
+        indices_mutation = np.arange(n)
+
+    mutate = [heuristic_mutation]
+
+    for i, indice in enumerate(indices_mutation):
+        individuo = pob[indice]
+        mutante = mutate[operator](individuo[0], cromosomas_mutation, funcion_aptitud)
+        # print(
+        #     f"individuo original: {individuo[0]} (apt) {individuo[3]} vs mutante {mutante[0]} (apt) {mutante[3]}"
+        # )
+        pob[indice] = mutante
+
+    return pob
+
+
+def heuristic_mutation(individuo, cromosomas_mutation=None, funcion_aptitud=None):
+    """
+    Aplica una mutación heurística a un individuo.
+
+    Parámetros:
+    individuo (array): El individuo que se va a mutar.
+    cromosomas_mutation (int): La cantidad de genes que se van a mutar. Si no se proporciona, se tomará la mitad de los cromosomas del individuo. (default: None)
+
+    Descripción:
+    La función heuristic_mutation aplica una mutación heurística a un individuo. Primero, se selecciona un substring del individuo para mutar. Luego, se generan todas las posibles permutaciones del substring y se evalúa la aptitud de cada permutación. Finalmente, se selecciona la permutación con la mayor aptitud y se devuelve como el nuevo individuo mutado.
+
+    Validación de errores:
+    La función verifica que la cantidad de genes a mutar no supere la mitad de los cromosomas del individuo.
+
+    Retorno:
+    El individuo mutado con la aptitud optima.
+    """
+    num_cromos = len(individuo)
+    # print("\n")
+    # print(individuo)
+
+    if not cromosomas_mutation:
+        cromosomas_mutation = num_cromos // 2
+    else:
+        cromosomas_mutation = int(cromosomas_mutation)
+        if cromosomas_mutation > (num_cromos // 2):
+            raise ValueError(
+                "La cantidad de genes a mutar no debe pasar la mitad de los cromosomas del individuo"
+            )
+    # obtener substring
+    n = (num_cromos + 1) - cromosomas_mutation
+    idx = np.random.randint(0, n)
+    sublist = individuo[idx : idx + cromosomas_mutation]
+    # print(sublist)
+    # print("\n")
+
+    # Generar posibles soluciones
+    permutations = np.array(list(itertools.permutations(sublist)))
+
+    permutation_pob = np.zeros((permutations.shape[0], 4), dtype="object")
+    # permutation_pob[:,0] = [c.astype(int) for c in permutations]
+
+    for i, p in enumerate(permutations):
+        aux = individuo.copy()
+        aux[idx : idx + cromosomas_mutation] = p
+        permutation_pob[i, 0] = aux
+
+    permutation_apt = funcion_aptitud(permutation_pob)
+    permutation_pob[:, 3] = permutation_apt
+
+    permutation_pob = ordenar_poblacion(permutation_pob)
+
+    # print(permutation_pob)
+
+    return permutation_pob[-1]
+
+
+def mutacion(individuo, cromosomas_mutation=None):
     """
     Mutación que cambia un bit aleatorio de cada individuo,
     cambiando el 0 por 1.
