@@ -4,7 +4,6 @@ from math import radians, sin, cos, sqrt, atan2
 import itertools
 
 
-
 def normalizar(data, a=0, b=1):
     # Funcion para normalizar una población de valores en el rango [a,b]recibe como entrada:
     # - data (numpy array): una lista de valores o población
@@ -149,7 +148,7 @@ def individuo_toString(inviduo):
     return aux
 
 
-def ordenar_poblacion(poblacion, apt_column=3):
+def ordenar_poblacion(poblacion, apt_column=3, reverse=False):
     pob_ord = poblacion.copy()
 
     n = len(pob_ord)
@@ -158,7 +157,7 @@ def ordenar_poblacion(poblacion, apt_column=3):
             actual = pob_ord[j, apt_column]
             prox = pob_ord[j + 1, apt_column]
 
-            if actual < prox:
+            if (actual < prox and not reverse) or (actual > prox and reverse):
                 aux = pob_ord[j].copy()
                 pob_ord[j] = pob_ord[j + 1].copy()
                 pob_ord[j + 1] = aux.copy()
@@ -212,22 +211,25 @@ def buscar_hijos(hijos, espacio, columna=2):
 
 
 """" GET DISTANCIA """
-def get_distancia(lat1,long1,lat2,long2):
+
+
+def get_distancia(lat1, long1, lat2, long2):
     # radio de la tierra (km)
     r = 6371.0
-    # conversión de grados a radianes 
-    lat1,long1,lat2,long2 = map(radians,[lat1,long1,lat2,long2])
-    # diferencias 
+    # conversión de grados a radianes
+    lat1, long1, lat2, long2 = map(radians, [lat1, long1, lat2, long2])
+    # diferencias
     dlat = lat1 - lat2
     dlong = long1 - long2
 
     # formula de la distancia de HAversine
     # calcula la distancia entre dos puntos en una esfera, la tierra
-    a = sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlong/2)**2
-    c = 2*atan2(sqrt(a), sqrt(1-a))
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlong / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-    distancia = r*c
-    return distancia 
+    distancia = r * c
+    return distancia
+
 
 """OPERADORES DE SELECCIÓN"""
 
@@ -242,28 +244,36 @@ def torneo(T):
 # def seleccion_torneo(pob,k,n=1):
 
 
-def ruleta(poblacion, n=2):
+def ruleta(poblacion, n=2, mode="max"):
     # Valores unicos
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
     indiv_unicos = poblacion[indices_unicos]
 
-    # Ordenar por aptitud
-    indiv_unicos = ordenar_poblacion(poblacion)
+    if mode == "max":
+        # Ordenar por aptitud
+        indiv_unicos = ordenar_poblacion(poblacion)
+        # Aptitud total
+        apt_total = np.sum(indiv_unicos[:, 3])
+        # Probabilidad por aptitud
+        prob_apt = indiv_unicos[:, 3] / apt_total
+    else:
+        # Ordenar por aptitud
+        indiv_unicos = ordenar_poblacion(poblacion, reverse=True)
+        # Aptitud total
+        apt_total = np.sum(1 / indiv_unicos[:, 3])
+        # Probabilidad por aptitud
+        prob_apt = (1 / indiv_unicos[:, 3]) / apt_total
 
-    # Aptitud total
-    apt_total = np.sum(indiv_unicos[:, 3])
-    # Probabilidad por aptitud
-    prob_apt = indiv_unicos[:, 3] / apt_total
     # Probabilidad acumulada
     prob_acum = np.cumsum(prob_apt)
     indices = np.searchsorted(prob_acum, np.random.rand(n))
     return indiv_unicos[indices]
 
 
-def seleccion_ruleta(pob_tam, poblacion, op_cruza=0):
+def seleccion_ruleta(pob_tam, poblacion, op_cruza=0, mode="max"):
     descendencia = []
     for i in range(pob_tam):
-        padres = ruleta(poblacion)
+        padres = ruleta(poblacion, mode=mode)
 
         if op_cruza == 0:
             # Cruza un corte
@@ -271,6 +281,8 @@ def seleccion_ruleta(pob_tam, poblacion, op_cruza=0):
         elif op_cruza == 1:
             # cruza 2 cortes
             h1, h2 = cruce_dos_corte(padres)
+        elif op_cruza == 2:
+            h1, h2 = cruce_pmx(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -378,8 +390,8 @@ def cruce_un_corte(padres):
 
 
 def cruce_dos_corte(padres):
-    # esta función ya realiza la separación adecuada para las tercias sin importar si 
-    # es par o no la longitud de los cromosoams 
+    # esta función ya realiza la separación adecuada para las tercias sin importar si
+    # es par o no la longitud de los cromosoams
     n_cromos = len(padres[0, 2])
     p1 = padres[0, 2]
     p2 = padres[1, 2]
@@ -392,7 +404,7 @@ def cruce_dos_corte(padres):
     part_length = n_cromos // 3
     remaining = n_cromos % 3
 
-    # divide los cromosomas en tres partes 
+    # divide los cromosomas en tres partes
     parts_p = []
     parts_m = []
     start = 0
@@ -460,15 +472,14 @@ def cruce_pmx(padres, target_col=0):
 
     while xpt1 == xpt2:
         xpt2 = np.random.randint(1, n_cromos - 1)
-        print(xpt2)
-        
+        # print(xpt2)
 
     if xpt1 > xpt2:
         xpt1, xpt2 = xpt2, xpt1
-    print(f"Padre1: {p1}")
-    print(f"Padre2: {p2}")
-    print(f"pt1 : {xpt1}")
-    print(f"pt2 : {xpt2}")
+    # print(f"Padre1: {p1}")
+    # print(f"Padre2: {p2}")
+    # print(f"pt1 : {xpt1}")
+    # print(f"pt2 : {xpt2}")
 
     # Separar los cromosomas de los padres, por los pts de corte generados
     cromos_p1 = [p1[:xpt1], p1[xpt1:xpt2], p1[xpt2:]]
@@ -481,8 +492,8 @@ def cruce_pmx(padres, target_col=0):
     proto_child1 = [cromos_p1[0], cromos_p2[1], cromos_p1[2]]
     proto_child2 = [cromos_p2[0], cromos_p1[1], cromos_p2[2]]
 
-    print(f"proto-hijo1: {proto_child1}")
-    print(f"proto-hijo2: {proto_child2}")
+    # print(f"proto-hijo1: {proto_child1}")
+    # print(f"proto-hijo2: {proto_child2}")
 
     for i, (child) in enumerate(zip([proto_child1, proto_child2])):
         pchild = child[0]
@@ -494,17 +505,17 @@ def cruce_pmx(padres, target_col=0):
                     cid = np.where(offspring[i] == cromosoma)[0]
                     if cid.size > 0:
                         cid = cid[0]
-                        print(
-                            f"El elemento '{cromosoma}' está en la posición: {cid} cambiando por {cromosoma} -> {offspring[i-1][cid]}"
-                        )
+                        # print(
+                        #     f"El elemento '{cromosoma}' está en la posición: {cid} cambiando por {cromosoma} -> {offspring[i-1][cid]}"
+                        # )
                         cromosoma = offspring[i - 1][cid]
 
                 segment[k] = cromosoma
 
             pchild[j] = segment
 
-    print(f"final-hijo1: {proto_child1}")
-    print(f"final-hijo2: {proto_child2}")
+    # print(f"final-hijo1: {proto_child1}")
+    # print(f"final-hijo2: {proto_child2}")
 
     h1 = np.concatenate(proto_child1)
     h2 = np.concatenate(proto_child2)
@@ -514,7 +525,7 @@ def cruce_pmx(padres, target_col=0):
 def cruce_cx(padres):
     """
     Realiza un cruce CX (Cyclic Crossover) en la población con numpy arrays.
-    
+
     Args:
     padres: Un arreglo numpy de dos dimensiones que contiene dos individuos (padres).
             Cada padre es un vector de cromosomas (genes).
@@ -536,16 +547,16 @@ def cruce_cx(padres):
     print(f"Padre 1: {p1}")
     print(f"Padre 2: {p2}")
 
-    #n_cromos = len(p1)
+    # n_cromos = len(p1)
 
     size = len(p1)
-    offspring1 = np.full(size,-1)
-    offspring2 = np.full(size,-1)
+    offspring1 = np.full(size, -1)
+    offspring2 = np.full(size, -1)
 
-    # diccionario para los indices ciclados 
+    # diccionario para los indices ciclados
     p2_indices = {val: idx for idx, val in enumerate(p2)}
 
-    # posiciones para el cx, permutaciones 
+    # posiciones para el cx, permutaciones
     start = 0
     while -1 in offspring1:
         if offspring1[start] == -1:
@@ -573,20 +584,21 @@ def cruce_cx(padres):
             offspring1[i] = p2[i]
         if offspring2[i] == -1:
             offspring2[i] = p1[i]
-    
+
     print(f"Hijo 1: {offspring1}")
     print(f"Hijo 2: {offspring2}")
     return offspring1, offspring2
 
+
 """OBTENER SIGUIENTE GENERACION"""
 
 
-def get_next_gen(poblacion, op_seleccion, op_cruza=0):
+def get_next_gen(poblacion, op_seleccion, op_cruza=0, mode="max"):
     if op_seleccion == 0:
         # Seleccion por ruelta
         # Numero de parajas a reproducir
         n = int(len(poblacion) / 2)
-        return seleccion_ruleta(n, poblacion, op_cruza=op_cruza)
+        return seleccion_ruleta(n, poblacion, op_cruza=op_cruza, mode=mode)
     elif op_seleccion == 1:
         # selección aleatoria monogamica
         return seleccion_monogamica(poblacion, op_cruza=op_cruza)
@@ -733,7 +745,7 @@ def heuristic_mutation(individuo, cromosomas_mutation=None, funcion_aptitud=None
 
     # print(permutation_pob)
 
-    return permutation_pob[-1]
+    return permutation_pob[0]
 
 
 def mutacion(individuo, cromosomas_mutation=None):
@@ -757,23 +769,25 @@ def mutacion(individuo, cromosomas_mutation=None):
 
     return individuo_mutado
 
+
 def mutacion_scramble(individuo):
     n_cromos = len(individuo)
-    
+
     # selección de dos indices aleatorios
-    idx1,idx2 = np.sort(np.random.choice(range(n_cromos),size=2,replace=False))
-    # segmento a mutar 
-    scramble_part = individuo[idx1:idx2+1]
-    print(f'subrista:{scramble_part}')
+    idx1, idx2 = np.sort(np.random.choice(range(n_cromos), size=2, replace=False))
+    # segmento a mutar
+    scramble_part = individuo[idx1 : idx2 + 1]
+    print(f"subrista:{scramble_part}")
 
     # desorden del segmente
     np.random.shuffle(scramble_part)
-    print(f'subrista shuffle:{scramble_part}')
-    
-    #reemplazo de la parte del individuo con el segmento desordenado
-    individuo[idx1:idx2+1] = scramble_part
+    print(f"subrista shuffle:{scramble_part}")
 
-    return individuo 
+    # reemplazo de la parte del individuo con el segmento desordenado
+    individuo[idx1 : idx2 + 1] = scramble_part
+
+    return individuo
+
 
 """CRITERIOS DE PARO"""
 
