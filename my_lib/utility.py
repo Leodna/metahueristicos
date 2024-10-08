@@ -1,6 +1,6 @@
 import numpy as np
 import random
-
+from math import radians, sin, cos, sqrt, atan2
 
 def normalizar(data, a=0, b=1):
     # Funcion para normalizar una población de valores en el rango [a,b]recibe como entrada:
@@ -208,6 +208,24 @@ def buscar_hijos(hijos, espacio, columna=2):
     return np.array(hijos_esp)
 
 
+"""" GET DISTANCIA """
+def get_distancia(lat1,long1,lat2,long2):
+    # radio de la tierra (km)
+    r = 6371.0
+    # conversión de grados a radianes 
+    lat1,long1,lat2,long2 = map(radians,[lat1,long1,lat2,long2])
+    # diferencias 
+    dlat = lat1 - lat2
+    dlong = long1 - long2
+
+    # formula de la distancia de HAversine
+    # calcula la distancia entre dos puntos en una esfera, la tierra
+    a = sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlong/2)**2
+    c = 2*atan2(sqrt(a), sqrt(1-a))
+
+    distancia = r*c
+    return distancia 
+
 """OPERADORES DE SELECCIÓN"""
 
 
@@ -357,21 +375,35 @@ def cruce_un_corte(padres):
 
 
 def cruce_dos_corte(padres):
+    # esta función ya realiza la separación adecuada para las tercias sin importar si 
+    # es par o no la longitud de los cromosoams 
     n_cromos = len(padres[0, 2])
     p1 = padres[0, 2]
     p2 = padres[1, 2]
 
-    # división de padre y madre en tre partes
-    ter1 = int(n_cromos / 3)
-    ter2 = ter1 * 2
+    # Convertimos las cadenas de cromosomas en listas de genes
+    p1 = list(map(str, p1))  # Convertir a lista de caracteres
+    p2 = list(map(str, p2))
 
-    cromos_p = np.array([p1[:ter1], p1[ter1:ter2], p1[ter2:]])
+    # calcula la longitud de cada parte
+    part_length = n_cromos // 3
+    remaining = n_cromos % 3
 
-    cromos_m = np.array([p2[:ter1], p2[ter1:ter2], p2[ter2:]])
+    # divide los cromosomas en tres partes 
+    parts_p = []
+    parts_m = []
+    start = 0
+    for i in range(3):
+        end = start + part_length
+        if i < remaining:
+            end += 1
+        parts_p.append(p1[start:end])
+        parts_m.append(p2[start:end])
+        start = end
 
-    h1 = f"{cromos_m[0]}{cromos_p[1]}{cromos_m[2]}"
-    h2 = f"{cromos_p[0]}{cromos_m[1]}{cromos_p[2]}"
-    # print([hijo1,hijo2])
+    h1 = f"{parts_m[0]}{parts_p[1]}{parts_m[2]}"
+    h2 = f"{parts_p[0]}{parts_m[1]}{parts_p[2]}"
+
     return h1, h2
 
 
@@ -425,6 +457,8 @@ def cruce_pmx(padres, target_col=0):
 
     while xpt1 == xpt2:
         xpt2 = np.random.randint(1, n_cromos - 1)
+        print(xpt2)
+        
 
     if xpt1 > xpt2:
         xpt1, xpt2 = xpt2, xpt1
@@ -474,6 +508,73 @@ def cruce_pmx(padres, target_col=0):
     return h1, h2
 
 
+def cruce_cx(padres):
+    """
+    Realiza un cruce CX (Cyclic Crossover) en la población con numpy arrays.
+    
+    Args:
+    padres: Un arreglo numpy de dos dimensiones que contiene dos individuos (padres).
+            Cada padre es un vector de cromosomas (genes).
+
+    Returns:
+    offspring1: Primer hijo resultado del cruce.
+    offspring2: Segundo hijo resultado del cruce.
+
+    """
+    p1 = padres[0, 0]
+    p2 = padres[1, 0]
+
+    if len(p1) != len(p2):
+        raise Exception("Los padres no tienen la misma cantidad de cromosomas")
+
+    p1 = np.array(list(p1)).astype(int)
+    p2 = np.array(list(p2)).astype(int)
+
+    print(f"Padre 1: {p1}")
+    print(f"Padre 2: {p2}")
+
+    #n_cromos = len(p1)
+
+    size = len(p1)
+    offspring1 = np.full(size,-1)
+    offspring2 = np.full(size,-1)
+
+    # diccionario para los indices ciclados 
+    p2_indices = {val: idx for idx, val in enumerate(p2)}
+
+    # posiciones para el cx, permutaciones 
+    start = 0
+    while -1 in offspring1:
+        if offspring1[start] == -1:
+            cycle_indices = []
+            current = start
+
+            # inicio del ciclo
+            while current not in cycle_indices:
+                cycle_indices.append(current)
+                current_value = p1[current]
+                # índice para el padre 2
+                current = p2_indices[current_value]
+
+            # intercambio de los valores según el ciclo que se haya encontrado
+            for index in cycle_indices:
+                offspring1[index] = p1[index]
+                offspring2[index] = p2[index]
+
+            # cambia el ciclo de los restantes
+            start += 1
+
+    # se llena el resto d elos valores que no están en el ciclo
+    for i in range(size):
+        if offspring1[i] == -1:
+            offspring1[i] = p2[i]
+        if offspring2[i] == -1:
+            offspring2[i] = p1[i]
+    
+    print(f"Hijo 1: {offspring1}")
+    print(f"Hijo 2: {offspring2}")
+    return offspring1, offspring2
+
 """OBTENER SIGUIENTE GENERACION"""
 
 
@@ -522,6 +623,23 @@ def mutacion(individuo):
 
     return individuo_mutado
 
+def mutacion_scramble(individuo):
+    n_cromos = len(individuo)
+    
+    # selección de dos indices aleatorios
+    idx1,idx2 = np.sort(np.random.choice(range(n_cromos),size=2,replace=False))
+    # segmento a mutar 
+    scramble_part = individuo[idx1:idx2+1]
+    print(f'subrista:{scramble_part}')
+
+    # desorden del segmente
+    np.random.shuffle(scramble_part)
+    print(f'subrista shuffle:{scramble_part}')
+    
+    #reemplazo de la parte del individuo con el segmento desordenado
+    individuo[idx1:idx2+1] = scramble_part
+
+    return individuo 
 
 """CRITERIOS DE PARO"""
 
