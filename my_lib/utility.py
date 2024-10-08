@@ -673,17 +673,21 @@ def paro_epsilon_artesanal(pob, umb=0.8, prctg=0.8):
     return False
 
 
-def paro_epsilon(pob, threshold=0.75, majority_th=0.8):
+def paro_epsilon(pob, threshold=0.75, majority_th=0.8, opt=0):
     """
     Parametros:
     - pob: población de inidividuos
     - threshold: umbral de la función de costo (default: 0.75)
     - majority_th: proporción de la población que debe cumplir con el umbral (default: 0.8)
+    - opt: indica si es un problema de minimización o si es un problema de maximiazación, por defecto es maximizacion (default:0)
     Retorna:
     - True si se cumple la condición de paro, False en caso contrario
     """
+    if opt == 0:
+        porporcion = np.mean(pob[:, 3] > threshold)
+    else:
+        porporcion = np.mean(pob[:, 3] < threshold)
 
-    porporcion = np.mean(pob[:, 3] > threshold)
     if porporcion >= majority_th:
         return True
 
