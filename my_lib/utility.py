@@ -323,10 +323,10 @@ def seleccion_monogamica(poblacion, op_cruza=0):
 def seleccion_poligamica(poblacion, op_cruza=0):
     # número total de inidividuos
     n = len(poblacion)
-    # número de cruces para pasar genes
-    n_cruces = int(n / 2)
+    # número de parejas a formar
+    n_parejas = int(n / 2)
     descendencia = []
-    for i in range(n_cruces):
+    for i in range(n_parejas):
         # selección de índices consecutivos para un par de padres y asegura que no se repita la selección
         p1 = np.random.randint(0, n)
         p2 = np.random.randint(0, n)
@@ -348,9 +348,15 @@ def seleccion_poligamica(poblacion, op_cruza=0):
     return descendencia
 
 
-def seleccion_rank(poblacion, op_cruza=0):
+def seleccion_rank(poblacion, op_cruza=0, mode="max"):
     n = len(poblacion)
     descendencia = []
+
+    if mode == "max":
+        poblacion = ordenar_poblacion(poblacion)
+    else:
+        poblacion = ordenar_poblacion(poblacion, reverse=True)
+
     for i in range(0, n, 2):
         padres = np.vstack([poblacion[i], poblacion[i + 1]])
 
@@ -607,7 +613,7 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0, mode="max"):
         return seleccion_poligamica(poblacion, op_cruza=op_cruza)
     elif op_seleccion == 3:
         # Selección por ranking
-        return seleccion_rank(poblacion, op_cruza=op_cruza)
+        return seleccion_rank(poblacion, op_cruza=op_cruza, mode=mode)
     else:
         # TO-DO implementar todo el metodo de selección por
         # Torneo
@@ -807,7 +813,7 @@ def paro_epsilon_artesanal(pob, umb=0.8, prctg=0.8):
     return False
 
 
-def paro_epsilon(pob, threshold=0.75, majority_th=0.8, opt=0):
+def paro_epsilon(pob, threshold=0.75, majority_th=0.8, mode="max"):
     """
     Parametros:
     - pob: población de inidividuos
@@ -817,7 +823,7 @@ def paro_epsilon(pob, threshold=0.75, majority_th=0.8, opt=0):
     Retorna:
     - True si se cumple la condición de paro, False en caso contrario
     """
-    if opt == 0:
+    if opt == "max":
         porporcion = np.mean(pob[:, 3] > threshold)
     else:
         porporcion = np.mean(pob[:, 3] < threshold)
