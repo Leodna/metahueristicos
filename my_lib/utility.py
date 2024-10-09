@@ -282,7 +282,14 @@ def seleccion_ruleta(pob_tam, poblacion, op_cruza=0, mode="max"):
             # cruza 2 cortes
             h1, h2 = cruce_dos_corte(padres)
         elif op_cruza == 2:
+            # Cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+        elif op_cruza == 3:
+            # Cruza pmx
             h1, h2 = cruce_pmx(padres)
+        elif op_cruza == 4:
+            # Cruza cx
+            h1, h2 = cruce_cx(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -310,6 +317,15 @@ def seleccion_monogamica(poblacion, op_cruza=0):
         elif op_cruza == 1:
             # Cruza 2 cortes
             h1, h2 = cruce_dos_corte(padres)
+        elif op_cruza == 2:
+            # Cruza homegincca
+            h1, h2 = cruce_homogenea(padres)
+        elif op_cruza == 3:
+            # Cruza pmx
+            h1, h2 = cruce_pmx(padres)
+        elif op_cruza == 4:
+            # Cruza cx
+            h1, h2 = cruce_cx(padres)
         else:
             # Cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -338,6 +354,15 @@ def seleccion_poligamica(poblacion, op_cruza=0):
         elif op_cruza == 1:
             # cruza 2 cortes
             h1, h2 = cruce_dos_corte(padres)
+        elif op_cruza == 2:
+            # cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+        elif op_cruza == 3:
+            # cruza pmx
+            h1, h2 = cruce_pmx(padres)
+        elif op_cruza == 4:
+            # cruza cx
+            h1, h2 = cruce_cx(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -366,6 +391,14 @@ def seleccion_rank(poblacion, op_cruza=0, mode="max"):
         elif op_cruza == 1:
             # cruza 2 cortes
             h1, h2 = cruce_dos_corte(padres)
+        elif op_cruza == 2:
+            # cruza homogenica
+            h1, h2 = cruce_homogenea(padres)
+        elif op_cruza == 3:
+            # cruza  pmx
+            h1, h2 = cruce_pmx(padres)
+        elif op_cruza == 4:
+            h1, h2 = cruce_cx(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
