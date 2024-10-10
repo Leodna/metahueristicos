@@ -210,6 +210,48 @@ def buscar_hijos(hijos, espacio, columna=2):
     return np.array(hijos_esp)
 
 
+def hamming_dist(ind1, ind2):
+    """
+    Aplica la distancia de hamming entre dos individuos
+
+    Parámetros
+    ind1 (numpy array): La lista de genes de el individuo 1
+    ind2 (numpy array): La lista de genes de el individuo 2
+
+    Descripción
+    Realiza una comparación entre los elementos de cada individuos, si existen elementos iguales la distancia aumenta en uno, si no, la distancia no aumenta. La distancia minima posible es 0, lo cual indicaría que ambos individuos no comparten genes.
+
+    Retoran
+    distancia (numerico): La distancia de hamming
+    """
+    distancia = 0
+    for i in range(len(ind1)):
+        if ind1[i] != ind2[i]:
+            distancia += 1
+    return distancia
+
+
+def diversity_rate(poblacion):
+    aux_pob = poblacion[:, 0]
+    N = len(aux_pob)
+    D = 0
+    n_comparaciones = 0
+
+    # Sumar la distancia de Hamming entre todos los pares de individuos
+    for i in range(N):
+        for j in range(i + 1, N):
+            D += hamming_dist(aux_pob[i], aux_pob[j])
+            n_comparaciones += 1
+
+    # Calcular la distancia promedio
+    if n_comparaciones != 0:
+        D_promedio = D / n_comparaciones
+    else:
+        D_promedio = 0
+
+    return D_promedio
+
+
 """" GET DISTANCIA """
 
 
