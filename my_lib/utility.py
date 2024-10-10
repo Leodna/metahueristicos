@@ -705,6 +705,7 @@ def mutation(
     opt=0,
     operator=0,
     funcion_aptitud=None,
+    reverse=True,
 ):
     """
     Aplica una mutación a una parte de la población original.
@@ -759,7 +760,7 @@ def mutation(
         pob = ordenar_poblacion(pob)
         indices_mutation = np.arange(n)
 
-    mutate = [heuristic_mutation]
+    mutate = [heuristic_mutation, mutacion_scramble]
 
     for i, indice in enumerate(indices_mutation):
         individuo = pob[indice]
@@ -851,7 +852,7 @@ def mutacion(individuo, cromosomas_mutation=None):
     return individuo_mutado
 
 
-def mutacion_scramble(individuo):
+def mutacion_scramble(individuo, cromosomas_mutation=None, funcion_aptitud=None):
     n_cromos = len(individuo)
 
     # selección de dos indices aleatorios
