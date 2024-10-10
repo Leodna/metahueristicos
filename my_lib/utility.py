@@ -757,7 +757,7 @@ def mutation(
 
     # opt=1 ----> Por aptitud
     else:
-        pob = ordenar_poblacion(pob)
+        pob = ordenar_poblacion(pob, reverse=not reverse)
         indices_mutation = np.arange(n)
 
     mutate = [heuristic_mutation, mutacion_scramble]
@@ -766,14 +766,16 @@ def mutation(
         individuo = pob[indice]
         mutante = mutate[operator](individuo[0], cromosomas_mutation, funcion_aptitud)
         # print(
-        #     f"individuo original: {individuo[0]} (apt) {individuo[3]} vs mutante {mutante[0]} (apt) {mutante[3]}"
+        #     f"individuo original: {individuo[2]} (apt) {individuo[3]} vs mutante {mutante[2]} (apt) {mutante[3]}"
         # )
         pob[indice] = mutante
 
     return pob
 
 
-def heuristic_mutation(individuo, cromosomas_mutation=None, funcion_aptitud=None):
+def heuristic_mutation(
+    individuo, cromosomas_mutation=None, funcion_aptitud=None, reverse=True
+):
     """
     Aplica una mutación heurística a un individuo.
 
@@ -823,8 +825,8 @@ def heuristic_mutation(individuo, cromosomas_mutation=None, funcion_aptitud=None
     permutation_apt = funcion_aptitud(permutation_pob)
     permutation_pob[:, 3] = permutation_apt
 
-    permutation_pob = ordenar_poblacion(permutation_pob)
-
+    permutation_pob = ordenar_poblacion(permutation_pob, reverse=reverse)
+    permutation_pob[0, 2] = " ".join([chr(c + 64) for c in permutation_pob[0, 0]])
     # print(permutation_pob)
 
     return permutation_pob[0]
