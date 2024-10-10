@@ -829,7 +829,7 @@ def heuristic_mutation(
     permutation_pob[0, 2] = " ".join([chr(c + 64) for c in permutation_pob[0, 0]])
     # print(permutation_pob)
 
-    return permutation_pob[0]
+    return permutation_pob[0], idx
 
 
 def mutacion(individuo, cromosomas_mutation=None):
@@ -870,7 +870,7 @@ def mutacion_scramble(individuo, cromosomas_mutation=None, funcion_aptitud=None)
     # reemplazo de la parte del individuo con el segmento desordenado
     individuo[idx1 : idx2 + 1] = scramble_part
 
-    return individuo
+    return individuo, idx1
 
 
 """CRITERIOS DE PARO"""
