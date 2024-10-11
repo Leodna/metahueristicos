@@ -764,7 +764,10 @@ def mutation(
 
     for i, indice in enumerate(indices_mutation):
         individuo = pob[indice]
-        mutante = mutate[operator](individuo[0], cromosomas_mutation, funcion_aptitud)
+        mutante, _ = mutate[operator](
+            individuo[0], cromosomas_mutation, funcion_aptitud
+        )
+
         # print(
         #     f"individuo original: {individuo[2]} (apt) {individuo[3]} vs mutante {mutante[2]} (apt) {mutante[3]}"
         # )
