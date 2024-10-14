@@ -625,8 +625,8 @@ def cruce_cx(padres):
     p1 = np.array(list(p1)).astype(int)
     p2 = np.array(list(p2)).astype(int)
 
-    print(f"Padre 1: {p1}")
-    print(f"Padre 2: {p2}")
+    # print(f"Padre 1: {p1}")
+    # print(f"Padre 2: {p2}")
 
     # n_cromos = len(p1)
 
@@ -636,7 +636,7 @@ def cruce_cx(padres):
 
     # diccionario para los indices ciclados
     p2_indices = {val: idx for idx, val in enumerate(p2)}
-
+    print(p2_indices)
     # posiciones para el cx, permutaciones
     start = 0
     while -1 in offspring1:
@@ -657,7 +657,8 @@ def cruce_cx(padres):
                 offspring2[index] = p2[index]
 
             # cambia el ciclo de los restantes
-            start += 1
+            # start += 1
+            start = np.where(offspring1 == -1)[0]
 
     # se llena el resto d elos valores que no están en el ciclo
     for i in range(size):
@@ -760,20 +761,24 @@ def mutation(
         pob = ordenar_poblacion(pob, reverse=not reverse)
         indices_mutation = np.arange(n)
 
+    history = np.zeros((len(indices_mutation), 4), dtype="object")
     mutate = [heuristic_mutation, mutacion_scramble]
 
     for i, indice in enumerate(indices_mutation):
         individuo = pob[indice]
-        mutante, _ = mutate[operator](
+        mutante, idx_mutation = mutate[operator](
             individuo[0], cromosomas_mutation, funcion_aptitud
         )
-
+        history[i, 0] = " ".join(str(gen) for gen in individuo[0])
+        history[i, 1] = " ".join(str(gen) for gen in mutante[0])
+        history[i, 2] = idx_mutation
+        history[i, 3] = cromosomas_mutation
         # print(
         #     f"individuo original: {individuo[2]} (apt) {individuo[3]} vs mutante {mutante[2]} (apt) {mutante[3]}"
         # )
         pob[indice] = mutante
 
-    return pob
+    return pob, history
 
 
 def heuristic_mutation(
@@ -860,44 +865,62 @@ def mutacion(individuo, cromosomas_mutation=None):
 def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None):
     """
     Realiza la mutación scramble en un individuo (TSP), insertando la subsección mezclada en una posición diferente.
-    
+
     Args:
         individual: Un array de NumPy que representa el orden de visita de las ciudades.
         cromosomas_mutation: Tamaño de la subsección a mutar.
-    
+
     Returns:
         Un nuevo array con el individuo mutado.
     """
-    #print(f'individuo original: {individual}')
+    # print(f'individuo original: {individual}')
     n = len(individual)
-    #print(f'número de mutaciones: {cromosomas_mutation}')
-    
+    # print(f'número de mutaciones: {cromosomas_mutation}')
+    if not cromosomas_mutation:
+        cromosomas_mutation = n // 2
+    else:
+        cromosomas_mutation = int(cromosomas_mutation)
+        if cromosomas_mutation > (n // 2):
+            raise ValueError(
+                "La cantidad de genes a mutar no debe pasar la mitad de los cromosomas del individuo"
+            )
     # Selección de un índice aleatorio para el inicio del segmento a mutar
-    idx1 = np.random.randint(0, n - cromosomas_mutation + 1)
-    idx2 = idx1 + cromosomas_mutation - 1
-    #print(f'índices de mutación: {idx1}, {idx2}')
-    
+    # idx1 = np.random.randint(0, n - cromosomas_mutation + 1)
+    n_ = (n + 1) - cromosomas_mutation
+    idx1 = np.random.randint(0, n_)
+    idx2 = idx1 + cromosomas_mutation
+    # print(f'índices de mutación: {idx1}, {idx2}')
+
     # Segmento a mutar
-    scramble_part = individual[idx1:idx2+1]
-    #print(f'sublista original: {scramble_part}')
-    
+    scramble_part = individual[idx1 : idx2 + 1]
+    # print(f'sublista original: {scramble_part}')
+
     # Desordena el segmento
     np.random.shuffle(scramble_part)
-    #print(f'sublista desordenada: {scramble_part}')
-    
+    # print(f'sublista desordenada: {scramble_part}')
+
     # Crea una nueva versión del individuo sin la subsección
-    new_individual = np.concatenate((individual[:idx1], individual[idx2+1:]))
-    #print(f'individuo sin la sublista: {new_individual}')
-    
+    new_individual = np.concatenate((individual[:idx1], individual[idx2 + 1 :]))
+    # print(f'individuo sin la sublista: {new_individual}')
+
     # Selecciona un índice para insertar el segmento más adelante
     new_insert_idx = np.random.randint(idx1 + 1, n - cromosomas_mutation + 1)
-    #print(f'nuevo índice de inserción: {new_insert_idx}')
-    
+    # print(f'nuevo índice de inserción: {new_insert_idx}')
+
     # Inserta el segmento desordenado en la nueva posición
-    new_individual = np.concatenate((new_individual[:new_insert_idx], scramble_part, new_individual[new_insert_idx:]))
-    #print(f'individuo mutado: {new_individual}')
-    
-    return new_individual
+    new_individual = np.concatenate(
+        (
+            new_individual[:new_insert_idx],
+            scramble_part,
+            new_individual[new_insert_idx:],
+        )
+    )
+    # print(f'individuo mutado: {new_individual}')
+    new_mutante = np.zeros(4, dtype="object")
+    new_mutante[0] = new_individual
+    new_mutante[2] = " ".join([chr(c + 64) for c in new_individual])
+    new_mutante[3] = funcion_aptitud(np.array([new_mutante]))[0]
+    return new_mutante, idx1
 
 
 """CRITERIOS DE PARO"""
