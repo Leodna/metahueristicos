@@ -857,23 +857,47 @@ def mutacion(individuo, cromosomas_mutation=None):
     return individuo_mutado
 
 
-def mutacion_scramble(individuo, cromosomas_mutation=None, funcion_aptitud=None):
-    n_cromos = len(individuo)
-
-    # selección de dos indices aleatorios
-    idx1, idx2 = np.sort(np.random.choice(range(n_cromos), size=2, replace=False))
-    # segmento a mutar
-    scramble_part = individuo[idx1 : idx2 + 1]
-    print(f"subrista:{scramble_part}")
-
-    # desorden del segmente
+def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None):
+    """
+    Realiza la mutación scramble en un individuo (TSP), insertando la subsección mezclada en una posición diferente.
+    
+    Args:
+        individual: Un array de NumPy que representa el orden de visita de las ciudades.
+        cromosomas_mutation: Tamaño de la subsección a mutar.
+    
+    Returns:
+        Un nuevo array con el individuo mutado.
+    """
+    #print(f'individuo original: {individual}')
+    n = len(individual)
+    #print(f'número de mutaciones: {cromosomas_mutation}')
+    
+    # Selección de un índice aleatorio para el inicio del segmento a mutar
+    idx1 = np.random.randint(0, n - cromosomas_mutation + 1)
+    idx2 = idx1 + cromosomas_mutation - 1
+    #print(f'índices de mutación: {idx1}, {idx2}')
+    
+    # Segmento a mutar
+    scramble_part = individual[idx1:idx2+1]
+    #print(f'sublista original: {scramble_part}')
+    
+    # Desordena el segmento
     np.random.shuffle(scramble_part)
-    print(f"subrista shuffle:{scramble_part}")
-
-    # reemplazo de la parte del individuo con el segmento desordenado
-    individuo[idx1 : idx2 + 1] = scramble_part
-
-    return individuo, idx1
+    #print(f'sublista desordenada: {scramble_part}')
+    
+    # Crea una nueva versión del individuo sin la subsección
+    new_individual = np.concatenate((individual[:idx1], individual[idx2+1:]))
+    #print(f'individuo sin la sublista: {new_individual}')
+    
+    # Selecciona un índice para insertar el segmento más adelante
+    new_insert_idx = np.random.randint(idx1 + 1, n - cromosomas_mutation + 1)
+    #print(f'nuevo índice de inserción: {new_insert_idx}')
+    
+    # Inserta el segmento desordenado en la nueva posición
+    new_individual = np.concatenate((new_individual[:new_insert_idx], scramble_part, new_individual[new_insert_idx:]))
+    #print(f'individuo mutado: {new_individual}')
+    
+    return new_individual
 
 
 """CRITERIOS DE PARO"""
