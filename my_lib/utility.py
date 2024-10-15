@@ -636,29 +636,37 @@ def cruce_cx(padres):
 
     # diccionario para los indices ciclados
     p2_indices = {val: idx for idx, val in enumerate(p2)}
-    print(p2_indices)
+    #print(p2_indices)
     # posiciones para el cx, permutaciones
     start = 0
     while -1 in offspring1:
-        if offspring1[start] == -1:
-            cycle_indices = []
-            current = start
+        # Asegurarse de que 'start' sea un entero válido
+        while start < size and offspring1[start] != -1:
+            start += 1
+        
+        # Verifica si se ha llegado al final del array
+        if start >= size:
+            break
 
-            # inicio del ciclo
-            while current not in cycle_indices:
-                cycle_indices.append(current)
-                current_value = p1[current]
-                # índice para el padre 2
-                current = p2_indices[current_value]
+        
+        cycle_indices = []
+        current = start
 
-            # intercambio de los valores según el ciclo que se haya encontrado
-            for index in cycle_indices:
-                offspring1[index] = p1[index]
-                offspring2[index] = p2[index]
+        # inicio del ciclo
+        while current not in cycle_indices:
+            cycle_indices.append(current)
+            current_value = p1[current]
+            # índice para el padre 2
+            current = p2_indices[current_value]
+
+        # intercambio de los valores según el ciclo que se haya encontrado
+        for index in cycle_indices:
+            offspring1[index] = p1[index]
+            offspring2[index] = p2[index]
 
             # cambia el ciclo de los restantes
             # start += 1
-            start = np.where(offspring1 == -1)[0]
+            #start = np.where(offspring1 == -1)[0]
 
     # se llena el resto d elos valores que no están en el ciclo
     for i in range(size):
