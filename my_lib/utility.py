@@ -603,81 +603,137 @@ def cruce_pmx(padres, target_col=0):
     return h1, h2
 
 
+#GPT CRUCE CX
 def cruce_cx(padres):
-    """
-    Realiza un cruce CX (Cyclic Crossover) en la población con numpy arrays.
+    padre1 = padres[0, 0]
+    padre2 = padres[1, 0]
 
-    Args:
-    padres: Un arreglo numpy de dos dimensiones que contiene dos individuos (padres).
-            Cada padre es un vector de cromosomas (genes).
+    padre1 = np.array(list(padre1)).astype(int)
+    padre2 = np.array(list(padre2)).astype(int)
 
-    Returns:
-    offspring1: Primer hijo resultado del cruce.
-    offspring2: Segundo hijo resultado del cruce.
+    size = len(padre1)
+    hijo1 = [-1] * size
+    hijo2 = [-1] * size
 
-    """
-    p1 = padres[0, 0]
-    p2 = padres[1, 0]
+    # Crear Hijo 1 desde Padre 1 y Padre 2
+    start = 0  # Escoge un punto inicial
+    idx = start
 
-    if len(p1) != len(p2):
-        raise Exception("Los padres no tienen la misma cantidad de cromosomas")
+    # Realizar el ciclo de CX para Hijo 1
+    while True:
+        # Copia el valor de Padre1 a Hijo1 en la posición actual
+        hijo1[idx] = padre1[idx]
 
-    p1 = np.array(list(p1)).astype(int)
-    p2 = np.array(list(p2)).astype(int)
+        # Busca el índice donde el valor de Padre2 en idx aparece en Padre1
+        idx = np.where(padre1 == padre2[idx])[0][0]
 
-    # print(f"Padre 1: {p1}")
-    # print(f"Padre 2: {p2}")
-
-    # n_cromos = len(p1)
-
-    size = len(p1)
-    offspring1 = np.full(size, -1)
-    offspring2 = np.full(size, -1)
-
-    # diccionario para los indices ciclados
-    p2_indices = {val: idx for idx, val in enumerate(p2)}
-    #print(p2_indices)
-    # posiciones para el cx, permutaciones
-    start = 0
-    while -1 in offspring1:
-        # Asegurarse de que 'start' sea un entero válido
-        while start < size and offspring1[start] != -1:
-            start += 1
-        
-        # Verifica si se ha llegado al final del array
-        if start >= size:
+        # Si volvemos al índice inicial, terminamos el ciclo
+        if idx == start:
             break
 
-        
-        cycle_indices = []
-        current = start
-
-        # inicio del ciclo
-        while current not in cycle_indices:
-            cycle_indices.append(current)
-            current_value = p1[current]
-            # índice para el padre 2
-            current = p2_indices[current_value]
-
-        # intercambio de los valores según el ciclo que se haya encontrado
-        for index in cycle_indices:
-            offspring1[index] = p1[index]
-            offspring2[index] = p2[index]
-
-            # cambia el ciclo de los restantes
-            # start += 1
-            #start = np.where(offspring1 == -1)[0]
-
-    # se llena el resto d elos valores que no están en el ciclo
+    # Rellenar las posiciones restantes de Hijo 1 con los valores de Padre 2
     for i in range(size):
-        if offspring1[i] == -1:
-            offspring1[i] = p2[i]
-        if offspring2[i] == -1:
-            offspring2[i] = p1[i]
+        if hijo1[i] == -1:  # Si está vacío en Hijo 1
+            hijo1[i] = padre2[i]
 
-    print(f"Hijo 1: {offspring1}")
-    print(f"Hijo 2: {offspring2}")
-    return offspring1, offspring2
+    # Ahora generamos Hijo 2 usando el mismo proceso, pero con los roles invertidos
+    start = 0  # Escoge un punto inicial
+    idx = start
+
+    # Realizar el ciclo de CX para Hijo 2
+    while True:
+        # Copia el valor de Padre2 a Hijo2 en la posición actual
+        hijo2[idx] = padre2[idx]
+
+        # Busca el índice donde el valor de Padre1 en idx aparece en Padre2
+        idx = np.where(padre2 == padre1[idx])[0][0]
+
+        # Si volvemos al índice inicial, terminamos el ciclo
+        if idx == start:
+            break
+
+    # Rellenar las posiciones restantes de Hijo 2 con los valores de Padre 1
+    for i in range(size):
+        if hijo2[i] == -1:  # Si está vacío en Hijo 2
+            hijo2[i] = padre1[i]
+
+    return np.array(hijo1), np.array(hijo2)
+
+
+# def cruce_cx(padres):
+#     """
+#     Realiza un cruce CX (Cyclic Crossover) en la población con numpy arrays.
+
+#     Args:
+#     padres: Un arreglo numpy de dos dimensiones que contiene dos individuos (padres).
+#             Cada padre es un vector de cromosomas (genes).
+
+#     Returns:
+#     offspring1: Primer hijo resultado del cruce.
+#     offspring2: Segundo hijo resultado del cruce.
+
+#     """
+#     p1 = padres[0, 0]
+#     p2 = padres[1, 0]
+
+#     if len(p1) != len(p2):
+#         raise Exception("Los padres no tienen la misma cantidad de cromosomas")
+
+#     p1 = np.array(list(p1)).astype(int)
+#     p2 = np.array(list(p2)).astype(int)
+
+#     # print(f"Padre 1: {p1}")
+#     # print(f"Padre 2: {p2}")
+
+#     # n_cromos = len(p1)
+
+#     size = len(p1)
+#     offspring1 = np.full(size, -1)
+#     offspring2 = np.full(size, -1)
+
+#     # diccionario para los indices ciclados
+#     p2_indices = {val: idx for idx, val in enumerate(p2)}
+#     # print(p2_indices)
+#     # posiciones para el cx, permutaciones
+#     start = 0
+#     while -1 in offspring1:
+#         # Asegurarse de que 'start' sea un entero válido
+#         while start < size and offspring1[start] != -1:
+#             start += 1
+
+#         # Verifica si se ha llegado al final del array
+#         if start >= size:
+#             break
+
+#         cycle_indices = []
+#         current = start
+
+#         # inicio del ciclo
+#         while current not in cycle_indices:
+#             cycle_indices.append(current)
+#             current_value = p1[current]
+#             # índice para el padre 2
+#             current = p2_indices[current_value]
+
+#         # intercambio de los valores según el ciclo que se haya encontrado
+#         for index in cycle_indices:
+#             offspring1[index] = p1[index]
+#             offspring2[index] = p2[index]
+
+#             # cambia el ciclo de los restantes
+#             # start += 1
+#             # start = np.where(offspring1 == -1)[0]
+
+#     # se llena el resto d elos valores que no están en el ciclo
+#     for i in range(size):
+#         if offspring1[i] == -1:
+#             offspring1[i] = p2[i]
+#         if offspring2[i] == -1:
+#             offspring2[i] = p1[i]
+
+#     # print(f"Hijo 1: {offspring1}")
+#     # print(f"Hijo 2: {offspring2}")
+#     return offspring1, offspring2
 
 
 """OBTENER SIGUIENTE GENERACION"""
@@ -898,44 +954,23 @@ def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None
     n_ = (n + 1) - cromosomas_mutation
     idx1 = np.random.randint(0, n_)
     idx2 = idx1 + cromosomas_mutation
-    #print(f'índices de mutación: {idx1}, {idx2}')
+    # print(f'índices de mutación: {idx1}, {idx2}')
 
+    # Crea una nueva versión del individuo sin la subsección
+    new_individual = individual.copy()
     # Segmento a mutar
-    scramble_part = individual[idx1 : idx2 + 1]
-    # print(f'sublista original: {scramble_part}')
+    scramble_part = new_individual[idx1:idx2]
 
     # Desordena el segmento
     np.random.shuffle(scramble_part)
-    #print(f'sublista desordenada: {scramble_part}')
 
-    # Crea una nueva versión del individuo sin la subsección
-    new_individual = np.concatenate((individual[:idx1], individual[idx2 + 1 :]))
-    # print(f'individuo sin la sublista: {new_individual}')
+    new_individual[idx1:idx2] = scramble_part
 
     # Cálculo de la nueva posición de inserción de manera cíclica
-    # Empezamos desde el inicio y nos movemos cíclicamente
-    for insert_pos in range(0, n):
-        if insert_pos + cromosomas_mutation <= n:
-            # Si hay suficiente espacio desde insert_pos hasta n, insertamos
-            new_individual = np.concatenate(
-                (
-                    new_individual[:insert_pos],
-                    scramble_part,
-                    new_individual[insert_pos:],
-                )
-            )
-            break
-        else:
-            # Si no hay suficiente espacio, cicla las posiciones
-            offset = (insert_pos + cromosomas_mutation) % n
-            new_individual = np.concatenate(
-                (
-                    new_individual[:offset],
-                    scramble_part,
-                    new_individual[offset:],
-                )
-            )
-            break
+    # Generar un número aleatorio que no sea idx1
+    choices = np.delete(np.arange(n), idx1)
+    nidx = np.random.choice(choices)
+    new_individual = np.roll(new_individual, (nidx - idx1))
 
     # print(f'individuo mutado: {new_individual}')
     new_mutante = np.zeros(4, dtype="object")
