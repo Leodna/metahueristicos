@@ -876,6 +876,7 @@ def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None
     # print(f'individuo original: {individual}')
     n = len(individual)
     # print(f'número de mutaciones: {cromosomas_mutation}')
+
     if not cromosomas_mutation:
         cromosomas_mutation = n // 2
     else:
@@ -889,7 +890,7 @@ def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None
     n_ = (n + 1) - cromosomas_mutation
     idx1 = np.random.randint(0, n_)
     idx2 = idx1 + cromosomas_mutation
-    # print(f'índices de mutación: {idx1}, {idx2}')
+    #print(f'índices de mutación: {idx1}, {idx2}')
 
     # Segmento a mutar
     scramble_part = individual[idx1 : idx2 + 1]
@@ -897,24 +898,37 @@ def mutacion_scramble(individual, cromosomas_mutation=None, funcion_aptitud=None
 
     # Desordena el segmento
     np.random.shuffle(scramble_part)
-    # print(f'sublista desordenada: {scramble_part}')
+    #print(f'sublista desordenada: {scramble_part}')
 
     # Crea una nueva versión del individuo sin la subsección
     new_individual = np.concatenate((individual[:idx1], individual[idx2 + 1 :]))
     # print(f'individuo sin la sublista: {new_individual}')
 
-    # Selecciona un índice para insertar el segmento más adelante
-    new_insert_idx = np.random.randint(idx1 + 1, n - cromosomas_mutation + 1)
-    # print(f'nuevo índice de inserción: {new_insert_idx}')
+    # Cálculo de la nueva posición de inserción de manera cíclica
+    # Empezamos desde el inicio y nos movemos cíclicamente
+    for insert_pos in range(0, n):
+        if insert_pos + cromosomas_mutation <= n:
+            # Si hay suficiente espacio desde insert_pos hasta n, insertamos
+            new_individual = np.concatenate(
+                (
+                    new_individual[:insert_pos],
+                    scramble_part,
+                    new_individual[insert_pos:],
+                )
+            )
+            break
+        else:
+            # Si no hay suficiente espacio, cicla las posiciones
+            offset = (insert_pos + cromosomas_mutation) % n
+            new_individual = np.concatenate(
+                (
+                    new_individual[:offset],
+                    scramble_part,
+                    new_individual[offset:],
+                )
+            )
+            break
 
-    # Inserta el segmento desordenado en la nueva posición
-    new_individual = np.concatenate(
-        (
-            new_individual[:new_insert_idx],
-            scramble_part,
-            new_individual[new_insert_idx:],
-        )
-    )
     # print(f'individuo mutado: {new_individual}')
     new_mutante = np.zeros(4, dtype="object")
     new_mutante[0] = new_individual
