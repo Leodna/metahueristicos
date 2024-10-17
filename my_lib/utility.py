@@ -603,7 +603,7 @@ def cruce_pmx(padres, target_col=0):
     return h1, h2
 
 
-#GPT CRUCE CX
+# GPT CRUCE CX
 def cruce_cx(padres):
     padre1 = padres[0, 0]
     padre2 = padres[1, 0]
