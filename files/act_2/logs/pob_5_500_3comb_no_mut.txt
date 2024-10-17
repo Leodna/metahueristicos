@@ -1,0 +1,1332 @@
+LOGS_EXPERIMENTO_pob_5_500_3comb_no_mut===================================================================
+Población inicial #1
+Costo promedio inicial 68655.97176900001
+...................................................................
+Generación: 0
+Costo promedio: 62197.93888419997
+Varianza del costo en la generación: 27476365.57147811
+Desviación estándar del costo en la generación: 5241.79030212752
+Diversidad promedio: 16.969635270541083 genes
+Menor costo de toda la generación: 38963.6178
+Mayor costo de toda la generación: 68890.8906
+Tiempo de ejecución de la generación 0: 10.556655168533325
+...................................................................
+...................................................................
+Generación: 1
+Costo promedio: 58671.75110879993
+Varianza del costo en la generación: 19611643.883848302
+Desviación estándar del costo en la generación: 4428.503571619684
+Diversidad promedio: 16.919086172344688 genes
+Menor costo de toda la generación: 38963.6178
+Mayor costo de toda la generación: 64122.2693
+Tiempo de ejecución de la generación 1: 10.175973653793335
+...................................................................
+...................................................................
+Generación: 2
+Costo promedio: 55391.64187920003
+Varianza del costo en la generación: 14722080.88652279
+Desviación estándar del costo en la generación: 3836.936393338153
+Diversidad promedio: 16.831310621242483 genes
+Menor costo de toda la generación: 38963.6178
+Mayor costo de toda la generación: 60310.741
+Tiempo de ejecución de la generación 2: 10.246426105499268
+...................................................................
+...................................................................
+Generación: 3
+Costo promedio: 52987.873683399914
+Varianza del costo en la generación: 13231898.70610144
+Desviación estándar del costo en la generación: 3637.567690930499
+Diversidad promedio: 16.734669338677353 genes
+Menor costo de toda la generación: 38963.6178
+Mayor costo de toda la generación: 57232.218
+Tiempo de ejecución de la generación 3: 9.821202278137207
+...................................................................
+...................................................................
+Generación: 4
+Costo promedio: 51135.73023179998
+Varianza del costo en la generación: 10504339.755044311
+Desviación estándar del costo en la generación: 3241.03991876748
+Diversidad promedio: 16.623038076152305 genes
+Menor costo de toda la generación: 38963.6178
+Mayor costo de toda la generación: 55001.4216
+Tiempo de ejecución de la generación 4: 9.693827867507935
+...................................................................
+...................................................................
+Generación: 5
+Costo promedio: 49290.18311800002
+Varianza del costo en la generación: 9902501.474738069
+Desviación estándar del costo en la generación: 3146.8240298335827
+Diversidad promedio: 16.468529058116232 genes
+Menor costo de toda la generación: 38121.7434
+Mayor costo de toda la generación: 53037.4895
+Tiempo de ejecución de la generación 5: 9.732542037963867
+...................................................................
+...................................................................
+Generación: 6
+Costo promedio: 47846.11603100005
+Varianza del costo en la generación: 8299491.559200502
+Desviación estándar del costo en la generación: 2880.883815637226
+Diversidad promedio: 16.32032865731463 genes
+Menor costo de toda la generación: 36330.5886
+Mayor costo de toda la generación: 51321.8349
+Tiempo de ejecución de la generación 6: 10.583091259002686
+...................................................................
+...................................................................
+Generación: 7
+Costo promedio: 46344.56320040001
+Varianza del costo en la generación: 7679551.1708298195
+Desviación estándar del costo en la generación: 2771.20031228885
+Diversidad promedio: 16.13524649298597 genes
+Menor costo de toda la generación: 36330.5886
+Mayor costo de toda la generación: 49799.3388
+Tiempo de ejecución de la generación 7: 10.244391679763794
+...................................................................
+...................................................................
+Generación: 8
+Costo promedio: 44996.243188599896
+Varianza del costo en la generación: 6296816.574751529
+Desviación estándar del costo en la generación: 2509.3458459828785
+Diversidad promedio: 16.01907014028056 genes
+Menor costo de toda la generación: 36330.5886
+Mayor costo de toda la generación: 47991.1661
+Tiempo de ejecución de la generación 8: 10.224337100982666
+...................................................................
+...................................................................
+Generación: 9
+Costo promedio: 43772.068864199944
+Varianza del costo en la generación: 5769003.47660812
+Desviación estándar del costo en la generación: 2401.874991877829
+Diversidad promedio: 15.968432865731463 genes
+Menor costo de toda la generación: 33988.3633
+Mayor costo de toda la generación: 46671.9101
+Tiempo de ejecución de la generación 9: 9.781444787979126
+...................................................................
+...................................................................
+Generación: 10
+Costo promedio: 42615.86676940001
+Varianza del costo en la generación: 4992217.228567095
+Desviación estándar del costo en la generación: 2234.327019164181
+Diversidad promedio: 15.712480961923848 genes
+Menor costo de toda la generación: 33988.3633
+Mayor costo de toda la generación: 45523.7643
+Tiempo de ejecución de la generación 10: 10.212752342224121
+...................................................................
+...................................................................
+Generación: 11
+Costo promedio: 41334.37041519995
+Varianza del costo en la generación: 4253056.890076474
+Desviación estándar del costo en la generación: 2062.2940842848952
+Diversidad promedio: 15.431759519038076 genes
+Menor costo de toda la generación: 33988.3633
+Mayor costo de toda la generación: 43696.2212
+Tiempo de ejecución de la generación 11: 9.424549579620361
+...................................................................
+...................................................................
+Generación: 12
+Costo promedio: 40380.21349499992
+Varianza del costo en la generación: 4198665.61099005
+Desviación estándar del costo en la generación: 2049.0645697464124
+Diversidad promedio: 14.920296593186373 genes
+Menor costo de toda la generación: 33988.3633
+Mayor costo de toda la generación: 42531.8975
+Tiempo de ejecución de la generación 12: 10.006958723068237
+...................................................................
+...................................................................
+Generación: 13
+Costo promedio: 39218.744091799985
+Varianza del costo en la generación: 3427032.9343916564
+Desviación estándar del costo en la generación: 1851.2247120194934
+Diversidad promedio: 14.212088176352706 genes
+Menor costo de toda la generación: 33805.5143
+Mayor costo de toda la generación: 41652.9806
+Tiempo de ejecución de la generación 13: 10.523468732833862
+...................................................................
+...................................................................
+Generación: 14
+Costo promedio: 38054.01491879993
+Varianza del costo en la generación: 2787157.4539976367
+Desviación estándar del costo en la generación: 1669.4781981198905
+Diversidad promedio: 13.203871743486975 genes
+Menor costo de toda la generación: 32274.7565
+Mayor costo de toda la generación: 40331.1931
+Tiempo de ejecución de la generación 14: 9.816297054290771
+...................................................................
+...................................................................
+Generación: 15
+Costo promedio: 37013.589979400145
+Varianza del costo en la generación: 1848433.029647054
+Desviación estándar del costo en la generación: 1359.5708990880373
+Diversidad promedio: 12.116208416833667 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 39017.8777
+Tiempo de ejecución de la generación 15: 10.008465766906738
+...................................................................
+...................................................................
+Generación: 16
+Costo promedio: 36014.20579240009
+Varianza del costo en la generación: 801014.9688811881
+Desviación estándar del costo en la generación: 894.9943960054655
+Diversidad promedio: 10.491615230460923 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 37411.3838
+Tiempo de ejecución de la generación 16: 10.136934518814087
+...................................................................
+...................................................................
+Generación: 17
+Costo promedio: 35520.28838720008
+Varianza del costo en la generación: 701292.6696600595
+Desviación estándar del costo en la generación: 837.4321880964808
+Diversidad promedio: 10.047254509018035 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 36330.5886
+Tiempo de ejecución de la generación 17: 9.781677007675171
+...................................................................
+...................................................................
+Generación: 18
+Costo promedio: 35146.58581160011
+Varianza del costo en la generación: 703137.5633129434
+Desviación estándar del costo en la generación: 838.5329828414285
+Diversidad promedio: 9.221034068136273 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 35744.1818
+Tiempo de ejecución de la generación 18: 8.831161499023438
+...................................................................
+...................................................................
+Generación: 19
+Costo promedio: 34671.238954600136
+Varianza del costo en la generación: 777566.9769532254
+Desviación estándar del costo en la generación: 881.7975827553768
+Diversidad promedio: 10.475406813627254 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 35540.1217
+Tiempo de ejecución de la generación 19: 9.19985842704773
+...................................................................
+...................................................................
+Generación: 20
+Costo promedio: 34165.880360199924
+Varianza del costo en la generación: 639736.1699547877
+Desviación estándar del costo en la generación: 799.835089224515
+Diversidad promedio: 10.058100200400801 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 34980.0331
+Tiempo de ejecución de la generación 20: 9.328060865402222
+...................................................................
+...................................................................
+Generación: 21
+Costo promedio: 33611.86624499996
+Varianza del costo en la generación: 370458.52845238766
+Desviación estándar del costo en la generación: 608.653044395892
+Diversidad promedio: 10.341811623246493 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 34173.4487
+Tiempo de ejecución de la generación 21: 10.193082571029663
+...................................................................
+...................................................................
+Generación: 22
+Costo promedio: 33285.448769199684
+Varianza del costo en la generación: 371149.6430573333
+Desviación estándar del costo en la generación: 609.2205208767457
+Diversidad promedio: 9.74281362725451 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 33814.1309
+Tiempo de ejecución de la generación 22: 10.392019271850586
+...................................................................
+...................................................................
+Generación: 23
+Costo promedio: 32894.20986699995
+Varianza del costo en la generación: 287616.2933787089
+Desviación estándar del costo en la generación: 536.2986979088322
+Diversidad promedio: 9.643286573146293 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 33492.0067
+Tiempo de ejecución de la generación 23: 10.15343189239502
+...................................................................
+...................................................................
+Generación: 24
+Costo promedio: 32472.881592199923
+Varianza del costo en la generación: 152759.54607083663
+Desviación estándar del costo en la generación: 390.8446572115789
+Diversidad promedio: 9.37563126252505 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 33190.6656
+Tiempo de ejecución de la generación 24: 9.468371152877808
+...................................................................
+...................................................................
+Generación: 25
+Costo promedio: 32252.99480559988
+Varianza del costo en la generación: 108039.68978914534
+Desviación estándar del costo en la generación: 328.693915047336
+Diversidad promedio: 6.153146292585171 genes
+Menor costo de toda la generación: 30112.1985
+Mayor costo de toda la generación: 32480.1058
+Tiempo de ejecución de la generación 25: 9.928081035614014
+...................................................................
+...................................................................
+Generación: 26
+Costo promedio: 32180.06109920011
+Varianza del costo en la generación: 136855.4836522792
+Desviación estándar del costo en la generación: 369.9398378821605
+Diversidad promedio: 2.840945891783567 genes
+Menor costo de toda la generación: 29555.8774
+Mayor costo de toda la generación: 32274.7565
+Tiempo de ejecución de la generación 26: 9.95942997932434
+...................................................................
+--------------------------------------------------------------------
+Tiempo de ejecución para la población #1: 268.4244923591614
+===================================================================
+===================================================================
+Población inicial #2
+Costo promedio inicial 69212.31659879997
+...................................................................
+Generación: 0
+Costo promedio: 62932.93070620001
+Varianza del costo en la generación: 24898290.767478783
+Desviación estándar del costo en la generación: 4989.81871088307
+Diversidad promedio: 16.973563126252504 genes
+Menor costo de toda la generación: 41723.5716
+Mayor costo de toda la generación: 69483.3778
+Tiempo de ejecución de la generación 0: 10.360361099243164
+...................................................................
+...................................................................
+Generación: 1
+Costo promedio: 59138.53736000007
+Varianza del costo en la generación: 19649663.812273603
+Desviación estándar del costo en la generación: 4432.79413150144
+Diversidad promedio: 16.932472945891785 genes
+Menor costo de toda la generación: 41723.5716
+Mayor costo de toda la generación: 64450.8866
+Tiempo de ejecución de la generación 1: 10.349980592727661
+...................................................................
+...................................................................
+Generación: 2
+Costo promedio: 55888.027633000085
+Varianza del costo en la generación: 15470699.206970878
+Desviación estándar del costo en la generación: 3933.2809722890224
+Diversidad promedio: 16.84827254509018 genes
+Menor costo de toda la generación: 41723.5716
+Mayor costo de toda la generación: 60713.9213
+Tiempo de ejecución de la generación 2: 10.077844858169556
+...................................................................
+...................................................................
+Generación: 3
+Costo promedio: 53427.5661238
+Varianza del costo en la generación: 12291874.306831338
+Desviación estándar del costo en la generación: 3505.976940430632
+Diversidad promedio: 16.766669338677353 genes
+Menor costo de toda la generación: 41080.1332
+Mayor costo de toda la generación: 57560.3979
+Tiempo de ejecución de la generación 3: 10.13142466545105
+...................................................................
+...................................................................
+Generación: 4
+Costo promedio: 51028.16094940001
+Varianza del costo en la generación: 11200363.677573508
+Desviación estándar del costo en la generación: 3346.6944404252845
+Diversidad promedio: 16.66058517034068 genes
+Menor costo de toda la generación: 41080.1332
+Mayor costo de toda la generación: 54912.5181
+Tiempo de ejecución de la generación 4: 10.190672636032104
+...................................................................
+...................................................................
+Generación: 5
+Costo promedio: 49246.93520819998
+Varianza del costo en la generación: 10668270.140353823
+Desviación estándar del costo en la generación: 3266.2317952579274
+Diversidad promedio: 16.51661723446894 genes
+Menor costo de toda la generación: 37276.5764
+Mayor costo de toda la generación: 52973.3872
+Tiempo de ejecución de la generación 5: 9.738645792007446
+...................................................................
+...................................................................
+Generación: 6
+Costo promedio: 47244.46826879996
+Varianza del costo en la generación: 9900652.031045148
+Desviación estándar del costo en la generación: 3146.5301573392153
+Diversidad promedio: 16.19153507014028 genes
+Menor costo de toda la generación: 37276.5764
+Mayor costo de toda la generación: 51316.759
+Tiempo de ejecución de la generación 6: 9.61593508720398
+...................................................................
+...................................................................
+Generación: 7
+Costo promedio: 45297.15005639995
+Varianza del costo en la generación: 7557902.239728461
+Desviación estándar del costo en la generación: 2749.1639164896046
+Diversidad promedio: 15.586741482965932 genes
+Menor costo de toda la generación: 36274.5491
+Mayor costo de toda la generación: 49127.3124
+Tiempo de ejecución de la generación 7: 10.224817991256714
+...................................................................
+...................................................................
+Generación: 8
+Costo promedio: 43253.819896199966
+Varianza del costo en la generación: 5143966.701526366
+Desviación estándar del costo en la generación: 2268.031459553938
+Diversidad promedio: 14.141555110220441 genes
+Menor costo de toda la generación: 36274.5491
+Mayor costo de toda la generación: 46305.8347
+Tiempo de ejecución de la generación 8: 10.002181053161621
+...................................................................
+...................................................................
+Generación: 9
+Costo promedio: 41541.458088799736
+Varianza del costo en la generación: 2951611.748499435
+Desviación estándar del costo en la generación: 1718.0255377902376
+Diversidad promedio: 11.833482965931864 genes
+Menor costo de toda la generación: 32048.1779
+Mayor costo de toda la generación: 44254.6577
+Tiempo de ejecución de la generación 9: 9.810571908950806
+...................................................................
+...................................................................
+Generación: 10
+Costo promedio: 40468.06051040001
+Varianza del costo en la generación: 2175216.23954379
+Desviación estándar del costo en la generación: 1474.8614306245147
+Diversidad promedio: 9.990204408817636 genes
+Menor costo de toda la generación: 32048.1779
+Mayor costo de toda la generación: 41723.5716
+Tiempo de ejecución de la generación 10: 9.910068988800049
+...................................................................
+...................................................................
+Generación: 11
+Costo promedio: 39455.38145300021
+Varianza del costo en la generación: 2211458.106807616
+Desviación estándar del costo en la generación: 1487.097208257623
+Diversidad promedio: 11.47986372745491 genes
+Menor costo de toda la generación: 32048.1779
+Mayor costo de toda la generación: 41080.1332
+Tiempo de ejecución de la generación 11: 9.651735782623291
+...................................................................
+...................................................................
+Generación: 12
+Costo promedio: 38393.13009820013
+Varianza del costo en la generación: 2420246.584059238
+Desviación estándar del costo en la generación: 1555.71417170997
+Diversidad promedio: 10.787671342685371 genes
+Menor costo de toda la generación: 31783.1657
+Mayor costo de toda la generación: 39681.1651
+Tiempo de ejecución de la generación 12: 9.550408124923706
+...................................................................
+...................................................................
+Generación: 13
+Costo promedio: 37356.83755420016
+Varianza del costo en la generación: 2158697.233614199
+Desviación estándar del costo en la generación: 1469.2505686962313
+Diversidad promedio: 11.979054108216433 genes
+Menor costo de toda la generación: 31783.1657
+Mayor costo de toda la generación: 39154.6416
+Tiempo de ejecución de la generación 13: 9.746849060058594
+...................................................................
+...................................................................
+Generación: 14
+Costo promedio: 36250.05334600016
+Varianza del costo en la generación: 2108535.1979939616
+Desviación estándar del costo en la generación: 1452.0796114517832
+Diversidad promedio: 12.19417234468938 genes
+Menor costo de toda la generación: 31783.1657
+Mayor costo de toda la generación: 37771.4416
+Tiempo de ejecución de la generación 14: 9.509146213531494
+...................................................................
+...................................................................
+Generación: 15
+Costo promedio: 35387.164969000114
+Varianza del costo en la generación: 2487277.36754363
+Desviación estándar del costo en la generación: 1577.1104487459431
+Diversidad promedio: 11.511895791583166 genes
+Menor costo de toda la generación: 28665.8084
+Mayor costo de toda la generación: 36780.3202
+Tiempo de ejecución de la generación 15: 9.922165632247925
+...................................................................
+...................................................................
+Generación: 16
+Costo promedio: 34446.62814839987
+Varianza del costo en la generación: 2485362.88931833
+Desviación estándar del costo en la generación: 1576.503374344099
+Diversidad promedio: 10.94197995991984 genes
+Menor costo de toda la generación: 28665.8084
+Mayor costo de toda la generación: 36274.5491
+Tiempo de ejecución de la generación 16: 9.900410890579224
+...................................................................
+...................................................................
+Generación: 17
+Costo promedio: 33202.379010199846
+Varianza del costo en la generación: 1769965.9896340752
+Desviación estándar del costo en la generación: 1330.4006876253768
+Diversidad promedio: 8.455543086172344 genes
+Menor costo de toda la generación: 28665.8084
+Mayor costo de toda la generación: 35193.4982
+Tiempo de ejecución de la generación 17: 10.07059097290039
+...................................................................
+...................................................................
+Generación: 18
+Costo promedio: 32051.136551999836
+Varianza del costo en la generación: 808599.2790693094
+Desviación estándar del costo en la generación: 899.2214849909388
+Diversidad promedio: 5.927583166332665 genes
+Menor costo de toda la generación: 28665.8084
+Mayor costo de toda la generación: 33467.1443
+Tiempo de ejecución de la generación 18: 10.050827741622925
+...................................................................
+...................................................................
+Generación: 19
+Costo promedio: 31606.58936399968
+Varianza del costo en la generación: 943806.1005369854
+Desviación estándar del costo en la generación: 971.4968350627734
+Diversidad promedio: 3.5775470941883767 genes
+Menor costo de toda la generación: 28369.9433
+Mayor costo de toda la generación: 32048.1779
+Tiempo de ejecución de la generación 19: 9.824267625808716
+...................................................................
+...................................................................
+Generación: 20
+Costo promedio: 31048.702295599767
+Varianza del costo en la generación: 1724188.809397928
+Desviación estándar del costo en la generación: 1313.0837023578993
+Diversidad promedio: 5.76423246492986 genes
+Menor costo de toda la generación: 28369.9433
+Mayor costo de toda la generación: 32048.1779
+Tiempo de ejecución de la generación 20: 9.500144481658936
+...................................................................
+...................................................................
+Generación: 21
+Costo promedio: 30021.907800799992
+Varianza del costo en la generación: 1706695.9273124908
+Desviación estándar del costo en la generación: 1306.4057284444564
+Diversidad promedio: 6.954605210420842 genes
+Menor costo de toda la generación: 28369.9433
+Mayor costo de toda la generación: 31783.1657
+Tiempo de ejecución de la generación 21: 9.903886079788208
+...................................................................
+...................................................................
+Generación: 22
+Costo promedio: 28749.555078199788
+Varianza del costo en la generación: 50446.45098241756
+Desviación estándar del costo en la generación: 224.6028739406902
+Diversidad promedio: 2.976056112224449 genes
+Menor costo de toda la generación: 28257.2783
+Mayor costo de toda la generación: 28930.8206
+Tiempo de ejecución de la generación 22: 9.952338457107544
+...................................................................
+...................................................................
+Generación: 23
+Costo promedio: 28577.096845999884
+Varianza del costo en la generación: 36062.88860419146
+Desviación estándar del costo en la generación: 189.90231331974726
+Diversidad promedio: 3.9952625250501 genes
+Menor costo de toda la generación: 28257.2783
+Mayor costo de toda la generación: 28930.8206
+Tiempo de ejecución de la generación 23: 9.536783695220947
+...................................................................
+...................................................................
+Generación: 24
+Costo promedio: 28425.38308219989
+Varianza del costo en la generación: 14942.692864261166
+Desviación estándar del costo en la generación: 122.24030785408374
+Diversidad promedio: 2.676352705410822 genes
+Menor costo de toda la generación: 28257.2783
+Mayor costo de toda la generación: 28665.8084
+Tiempo de ejecución de la generación 24: 9.384164094924927
+...................................................................
+...................................................................
+Generación: 25
+Costo promedio: 28361.60608999988
+Varianza del costo en la generación: 869.8026940658557
+Desviación estándar del costo en la generación: 29.492417569027054
+Diversidad promedio: 0.2746452905811623 genes
+Menor costo de toda la generación: 28257.2783
+Mayor costo de toda la generación: 28369.9433
+Tiempo de ejecución de la generación 25: 9.162728786468506
+...................................................................
+--------------------------------------------------------------------
+Tiempo de ejecución para la población #2: 256.0789523124695
+===================================================================
+===================================================================
+Población inicial #3
+Costo promedio inicial 68968.19880399996
+...................................................................
+Generación: 0
+Costo promedio: 62814.757634000016
+Varianza del costo en la generación: 20487511.747009773
+Desviación estándar del costo en la generación: 4526.313262138379
+Diversidad promedio: 16.96543486973948 genes
+Menor costo de toda la generación: 45508.907
+Mayor costo de toda la generación: 69092.9988
+Tiempo de ejecución de la generación 0: 10.167147159576416
+...................................................................
+...................................................................
+Generación: 1
+Costo promedio: 59516.739527999955
+Varianza del costo en la generación: 14711936.173202202
+Desviación estándar del costo en la generación: 3835.614184612707
+Diversidad promedio: 16.928312625250502 genes
+Menor costo de toda la generación: 45508.907
+Mayor costo de toda la generación: 64261.102
+Tiempo de ejecución de la generación 1: 10.36732792854309
+...................................................................
+...................................................................
+Generación: 2
+Costo promedio: 56490.120592399995
+Varianza del costo en la generación: 14035392.13646402
+Desviación estándar del costo en la generación: 3746.3838746802257
+Diversidad promedio: 16.864312625250502 genes
+Menor costo de toda la generación: 41180.0542
+Mayor costo de toda la generación: 60871.1208
+Tiempo de ejecución de la generación 2: 10.3109872341156
+...................................................................
+...................................................................
+Generación: 3
+Costo promedio: 53989.28422120003
+Varianza del costo en la generación: 12772870.404153164
+Desviación estándar del costo en la generación: 3573.9152765773792
+Diversidad promedio: 16.790268537074148 genes
+Menor costo de toda la generación: 39726.4781
+Mayor costo de toda la generación: 58167.0758
+Tiempo de ejecución de la generación 3: 9.996433973312378
+...................................................................
+...................................................................
+Generación: 4
+Costo promedio: 51745.254061600055
+Varianza del costo en la generación: 9905941.362999149
+Desviación estándar del costo en la generación: 3147.3705474569006
+Diversidad promedio: 16.722845691382766 genes
+Menor costo de toda la generación: 39726.4781
+Mayor costo de toda la generación: 55499.4149
+Tiempo de ejecución de la generación 4: 9.933915138244629
+...................................................................
+...................................................................
+Generación: 5
+Costo promedio: 49770.24359679996
+Varianza del costo en la generación: 8965013.90414249
+Desviación estándar del costo en la generación: 2994.163306191312
+Diversidad promedio: 16.613002004008017 genes
+Menor costo de toda la generación: 39726.4781
+Mayor costo de toda la generación: 53560.9457
+Tiempo de ejecución de la generación 5: 10.015990972518921
+...................................................................
+...................................................................
+Generación: 6
+Costo promedio: 48074.91745940003
+Varianza del costo en la generación: 7489382.475065357
+Desviación estándar del costo en la generación: 2736.67361500515
+Diversidad promedio: 16.457002004008014 genes
+Menor costo de toda la generación: 35018.2618
+Mayor costo de toda la generación: 51502.4049
+Tiempo de ejecución de la generación 6: 9.960164546966553
+...................................................................
+...................................................................
+Generación: 7
+Costo promedio: 46591.436738999895
+Varianza del costo en la generación: 5761402.668958057
+Desviación estándar del costo en la generación: 2400.292204911322
+Diversidad promedio: 16.255551102204407 genes
+Menor costo de toda la generación: 35018.2618
+Mayor costo de toda la generación: 49703.1595
+Tiempo de ejecución de la generación 7: 10.214941263198853
+...................................................................
+...................................................................
+Generación: 8
+Costo promedio: 45267.088957399916
+Varianza del costo en la generación: 4753327.298041597
+Desviación estándar del costo en la generación: 2180.212672663288
+Diversidad promedio: 16.073515030060122 genes
+Menor costo de toda la generación: 35010.7382
+Mayor costo de toda la generación: 48063.4193
+Tiempo de ejecución de la generación 8: 10.516345262527466
+...................................................................
+...................................................................
+Generación: 9
+Costo promedio: 44274.965401600006
+Varianza del costo en la generación: 4062061.7867854387
+Desviación estándar del costo en la generación: 2015.4557268234494
+Diversidad promedio: 15.837154308617235 genes
+Menor costo de toda la generación: 35010.7382
+Mayor costo de toda la generación: 46424.7699
+Tiempo de ejecución de la generación 9: 10.257975339889526
+...................................................................
+...................................................................
+Generación: 10
+Costo promedio: 43313.6124588001
+Varianza del costo en la generación: 4686270.530140299
+Desviación estándar del costo en la generación: 2164.779556938835
+Diversidad promedio: 15.811519038076153 genes
+Menor costo de toda la generación: 35010.7382
+Mayor costo de toda la generación: 45508.907
+Tiempo de ejecución de la generación 10: 10.175143003463745
+...................................................................
+...................................................................
+Generación: 11
+Costo promedio: 42279.13146079998
+Varianza del costo en la generación: 4306558.964511382
+Desviación estándar del costo en la generación: 2075.2250394864127
+Diversidad promedio: 15.65619238476954 genes
+Menor costo de toda la generación: 35010.7382
+Mayor costo de toda la generación: 44780.349
+Tiempo de ejecución de la generación 11: 10.003132104873657
+...................................................................
+...................................................................
+Generación: 12
+Costo promedio: 41161.41770919998
+Varianza del costo en la generación: 3982724.0555209923
+Desviación estándar del costo en la generación: 1995.6763403721036
+Diversidad promedio: 15.165258517034069 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 43563.3899
+Tiempo de ejecución de la generación 12: 10.192576169967651
+...................................................................
+...................................................................
+Generación: 13
+Costo promedio: 40239.37821080013
+Varianza del costo en la generación: 3543629.3099112976
+Desviación estándar del costo en la generación: 1882.4530033738686
+Diversidad promedio: 14.753394789579158 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 42539.6674
+Tiempo de ejecución de la generación 13: 10.065919160842896
+...................................................................
+...................................................................
+Generación: 14
+Costo promedio: 39110.36531239998
+Varianza del costo en la generación: 3119514.746617718
+Desviación estándar del costo en la generación: 1766.2148076091194
+Diversidad promedio: 14.408625250501002 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 41045.2028
+Tiempo de ejecución de la generación 14: 10.053977489471436
+...................................................................
+...................................................................
+Generación: 15
+Costo promedio: 38219.333603000036
+Varianza del costo en la generación: 3299496.500085812
+Desviación estándar del costo en la generación: 1816.4516233816446
+Diversidad promedio: 14.099991983967936 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 39950.0986
+Tiempo de ejecución de la generación 15: 10.203237533569336
+...................................................................
+...................................................................
+Generación: 16
+Costo promedio: 37384.69677640012
+Varianza del costo en la generación: 2989766.1488623754
+Desviación estándar del costo en la generación: 1729.0940254544794
+Diversidad promedio: 13.7305250501002 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 39273.5368
+Tiempo de ejecución de la generación 16: 10.294677495956421
+...................................................................
+...................................................................
+Generación: 17
+Costo promedio: 36382.45344940002
+Varianza del costo en la generación: 2555288.390650617
+Desviación estándar del costo en la generación: 1598.526943986437
+Diversidad promedio: 13.680352705410822 genes
+Menor costo de toda la generación: 32102.438
+Mayor costo de toda la generación: 38439.2385
+Tiempo de ejecución de la generación 17: 9.884128332138062
+...................................................................
+...................................................................
+Generación: 18
+Costo promedio: 35425.967396000146
+Varianza del costo en la generación: 2063530.632357524
+Desviación estándar del costo en la generación: 1436.4994369499502
+Diversidad promedio: 13.057362725450902 genes
+Menor costo de toda la generación: 29942.2858
+Mayor costo de toda la generación: 37730.2226
+Tiempo de ejecución de la generación 18: 10.555914640426636
+...................................................................
+...................................................................
+Generación: 19
+Costo promedio: 34600.223537000136
+Varianza del costo en la generación: 1264675.4186977975
+Desviación estándar del costo en la generación: 1124.5778846739772
+Diversidad promedio: 12.74211623246493 genes
+Menor costo de toda la generación: 29942.2858
+Mayor costo de toda la generación: 36031.8062
+Tiempo de ejecución de la generación 19: 9.856456518173218
+...................................................................
+...................................................................
+Generación: 20
+Costo promedio: 34119.646682200066
+Varianza del costo en la generación: 1140653.360549854
+Desviación estándar del costo en la generación: 1068.0137454873202
+Diversidad promedio: 10.601234468937875 genes
+Menor costo de toda la generación: 29942.2858
+Mayor costo de toda la generación: 35148.0312
+Tiempo de ejecución de la generación 20: 9.622719764709473
+...................................................................
+...................................................................
+Generación: 21
+Costo promedio: 33575.40990340004
+Varianza del costo en la generación: 835069.4411453571
+Desviación estándar del costo en la generación: 913.8213398391159
+Diversidad promedio: 11.695270541082165 genes
+Menor costo de toda la generación: 29942.2858
+Mayor costo de toda la generación: 35018.2618
+Tiempo de ejecución de la generación 21: 9.836047172546387
+...................................................................
+...................................................................
+Generación: 22
+Costo promedio: 33099.30343639987
+Varianza del costo en la generación: 457642.85528410063
+Desviación estándar del costo en la generación: 676.493056345814
+Diversidad promedio: 9.002965931863727 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 34152.3213
+Tiempo de ejecución de la generación 22: 9.751542568206787
+...................................................................
+...................................................................
+Generación: 23
+Costo promedio: 32947.94326619974
+Varianza del costo en la generación: 424187.91297182516
+Desviación estándar del costo en la generación: 651.2971003864712
+Diversidad promedio: 9.181490981963927 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 33356.7273
+Tiempo de ejecución de la generación 23: 8.749445915222168
+...................................................................
+...................................................................
+Generación: 24
+Costo promedio: 32817.60537539983
+Varianza del costo en la generación: 487932.1236213159
+Desviación estándar del costo en la generación: 698.5213837967424
+Diversidad promedio: 10.688184368737476 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 33356.7273
+Tiempo de ejecución de la generación 24: 9.016952991485596
+...................................................................
+...................................................................
+Generación: 25
+Costo promedio: 32623.16769940014
+Varianza del costo en la generación: 451928.3435435123
+Desviación estándar del costo en la generación: 672.2561591711245
+Diversidad promedio: 11.672561122244488 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 33301.6556
+Tiempo de ejecución de la generación 25: 10.195515632629395
+...................................................................
+...................................................................
+Generación: 26
+Costo promedio: 32242.436267000023
+Varianza del costo en la generación: 284396.0094841045
+Desviación estándar del costo en la generación: 533.2879236248506
+Diversidad promedio: 9.239318637274549 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 33161.2989
+Tiempo de ejecución de la generación 26: 9.636834144592285
+...................................................................
+...................................................................
+Generación: 27
+Costo promedio: 31991.37744299963
+Varianza del costo en la generación: 192127.81917195793
+Desviación estándar del costo en la generación: 438.32387474555605
+Diversidad promedio: 3.0705651302605212 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 32102.438
+Tiempo de ejecución de la generación 27: 8.561614274978638
+...................................................................
+...................................................................
+Generación: 28
+Costo promedio: 31967.09066379963
+Varianza del costo en la generación: 246766.8822142021
+Desviación estándar del costo en la generación: 496.75636102037197
+Diversidad promedio: 3.4213707414829657 genes
+Menor costo de toda la generación: 28615.002
+Mayor costo de toda la generación: 32102.438
+Tiempo de ejecución de la generación 28: 9.163601398468018
+...................................................................
+--------------------------------------------------------------------
+Tiempo de ejecución para la población #3: 287.56066513061523
+===================================================================
+===================================================================
+Población inicial #4
+Costo promedio inicial 69601.0716214
+...................................................................
+Generación: 0
+Costo promedio: 63252.71647939996
+Varianza del costo en la generación: 24812663.567746457
+Desviación estándar del costo en la generación: 4981.231129725507
+Diversidad promedio: 16.95920641282565 genes
+Menor costo de toda la generación: 39252.9669
+Mayor costo de toda la generación: 69928.0073
+Tiempo de ejecución de la generación 0: 9.69835877418518
+...................................................................
+...................................................................
+Generación: 1
+Costo promedio: 59223.2001264
+Varianza del costo en la generación: 19209694.903375566
+Desviación estándar del costo en la generación: 4382.886594856815
+Diversidad promedio: 16.917507014028057 genes
+Menor costo de toda la generación: 39252.9669
+Mayor costo de toda la generación: 64689.277
+Tiempo de ejecución de la generación 1: 9.861859560012817
+...................................................................
+...................................................................
+Generación: 2
+Costo promedio: 56016.78932499997
+Varianza del costo en la generación: 16411947.749410065
+Desviación estándar del costo en la generación: 4051.1662209060323
+Diversidad promedio: 16.86305410821643 genes
+Menor costo de toda la generación: 39252.9669
+Mayor costo de toda la generación: 60668.6569
+Tiempo de ejecución de la generación 2: 10.38344407081604
+...................................................................
+...................................................................
+Generación: 3
+Costo promedio: 53461.5213608
+Varianza del costo en la generación: 17229714.77166056
+Desviación estándar del costo en la generación: 4150.869158581195
+Diversidad promedio: 16.767182364729457 genes
+Menor costo de toda la generación: 39138.7028
+Mayor costo de toda la generación: 57778.1151
+Tiempo de ejecución de la generación 3: 10.658077239990234
+...................................................................
+...................................................................
+Generación: 4
+Costo promedio: 51208.737752600005
+Varianza del costo en la generación: 16516548.672071354
+Desviación estándar del costo en la generación: 4064.055692540563
+Diversidad promedio: 16.6085370741483 genes
+Menor costo de toda la generación: 37421.5622
+Mayor costo de toda la generación: 55707.2158
+Tiempo de ejecución de la generación 4: 10.319531917572021
+...................................................................
+...................................................................
+Generación: 5
+Costo promedio: 48937.82722679996
+Varianza del costo en la generación: 14075341.0955516
+Desviación estándar del costo en la generación: 3751.711755392677
+Diversidad promedio: 16.353114228456914 genes
+Menor costo de toda la generación: 37421.5622
+Mayor costo de toda la generación: 53436.7058
+Tiempo de ejecución de la generación 5: 10.403514862060547
+...................................................................
+...................................................................
+Generación: 6
+Costo promedio: 46867.96459999993
+Varianza del costo en la generación: 11083823.42826801
+Desviación estándar del costo en la generación: 3329.237664731674
+Diversidad promedio: 15.878541082164329 genes
+Menor costo de toda la generación: 37421.5622
+Mayor costo de toda la generación: 50958.713
+Tiempo de ejecución de la generación 6: 9.32188081741333
+...................................................................
+...................................................................
+Generación: 7
+Costo promedio: 44623.467783199994
+Varianza del costo en la generación: 7718855.344503094
+Desviación estándar del costo en la generación: 2778.2828049899986
+Diversidad promedio: 14.884240480961925 genes
+Menor costo de toda la generación: 36620.0113
+Mayor costo de toda la generación: 48722.3599
+Tiempo de ejecución de la generación 7: 10.415091753005981
+...................................................................
+...................................................................
+Generación: 8
+Costo promedio: 42876.612931399926
+Varianza del costo en la generación: 3994417.2591936174
+Desviación estándar del costo en la generación: 1998.6038274739738
+Diversidad promedio: 13.635647294589178 genes
+Menor costo de toda la generación: 36620.0113
+Mayor costo de toda la generación: 45845.4647
+Tiempo de ejecución de la generación 8: 10.661967039108276
+...................................................................
+...................................................................
+Generación: 9
+Costo promedio: 41759.64416559977
+Varianza del costo en la generación: 3011602.582688144
+Desviación estándar del costo en la generación: 1735.3969524832478
+Diversidad promedio: 13.517627254509017 genes
+Menor costo de toda la generación: 36620.0113
+Mayor costo de toda la generación: 43779.213
+Tiempo de ejecución de la generación 9: 9.770484209060669
+...................................................................
+...................................................................
+Generación: 10
+Costo promedio: 40744.24926619994
+Varianza del costo en la generación: 2555746.492581976
+Desviación estándar del costo en la generación: 1598.6702263387456
+Diversidad promedio: 13.390733466933868 genes
+Menor costo de toda la generación: 34700.565
+Mayor costo de toda la generación: 42879.3788
+Tiempo de ejecución de la generación 10: 9.645075798034668
+...................................................................
+...................................................................
+Generación: 11
+Costo promedio: 39558.129456400085
+Varianza del costo en la generación: 2048757.1952840397
+Desviación estándar del costo en la generación: 1431.348034296355
+Diversidad promedio: 13.30712625250501 genes
+Menor costo de toda la generación: 30004.861
+Mayor costo de toda la generación: 41438.3689
+Tiempo de ejecución de la generación 11: 8.651317596435547
+...................................................................
+...................................................................
+Generación: 12
+Costo promedio: 38722.17395320007
+Varianza del costo en la generación: 1441292.4062124887
+Desviación estándar del costo en la generación: 1200.5383818156288
+Diversidad promedio: 11.888769539078156 genes
+Menor costo de toda la generación: 30004.861
+Mayor costo de toda la generación: 39882.3485
+Tiempo de ejecución de la generación 12: 9.040050983428955
+...................................................................
+...................................................................
+Generación: 13
+Costo promedio: 38187.69254879977
+Varianza del costo en la generación: 2418613.838246171
+Desviación estándar del costo en la generación: 1555.1893255311943
+Diversidad promedio: 12.79058116232465 genes
+Menor costo de toda la generación: 30004.861
+Mayor costo de toda la generación: 39179.5829
+Tiempo de ejecución de la generación 13: 9.462373495101929
+...................................................................
+...................................................................
+Generación: 14
+Costo promedio: 37434.49162539986
+Varianza del costo en la generación: 3358773.3451495846
+Desviación estándar del costo en la generación: 1832.6956498965083
+Diversidad promedio: 11.86334268537074 genes
+Menor costo de toda la generación: 30004.861
+Mayor costo de toda la generación: 38780.5762
+Tiempo de ejecución de la generación 14: 9.55168628692627
+...................................................................
+...................................................................
+Generación: 15
+Costo promedio: 36433.67529460001
+Varianza del costo en la generación: 4164416.860650998
+Desviación estándar del costo en la generación: 2040.6902902329393
+Diversidad promedio: 12.770188376753508 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 38468.8815
+Tiempo de ejecución de la generación 15: 9.874155521392822
+...................................................................
+...................................................................
+Generación: 16
+Costo promedio: 35077.64335440009
+Varianza del costo en la generación: 5522744.2504228065
+Desviación estándar del costo en la generación: 2350.051967600463
+Diversidad promedio: 12.039214428857715 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 37121.8912
+Tiempo de ejecución de la generación 16: 10.116872072219849
+...................................................................
+...................................................................
+Generación: 17
+Costo promedio: 33111.71276140015
+Varianza del costo en la generación: 6398262.521179483
+Desviación estándar del costo en la generación: 2529.4787054212343
+Diversidad promedio: 8.729619238476953 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 35732.7575
+Tiempo de ejecución de la generación 17: 10.316303253173828
+...................................................................
+...................................................................
+Generación: 18
+Costo promedio: 31130.233897799815
+Varianza del costo en la generación: 5143023.450994024
+Desviación estándar del costo en la generación: 2267.823505256532
+Diversidad promedio: 5.220152304609218 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 34700.565
+Tiempo de ejecución de la generación 18: 10.497925996780396
+...................................................................
+...................................................................
+Generación: 19
+Costo promedio: 29248.443090799723
+Varianza del costo en la generación: 1116691.9657790966
+Desviación estándar del costo en la generación: 1056.7364694090465
+Diversidad promedio: 1.741803607214429 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 30004.861
+Tiempo de ejecución de la generación 19: 9.37599492073059
+...................................................................
+...................................................................
+Generación: 20
+Costo promedio: 28461.976988799815
+Varianza del costo en la generación: 1077686.8839663845
+Desviación estándar del costo en la generación: 1038.1169895374917
+Diversidad promedio: 2.1410901803607216 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 30004.861
+Tiempo de ejecución de la generación 20: 8.386471271514893
+...................................................................
+...................................................................
+Generación: 21
+Costo promedio: 27610.36151240002
+Varianza del costo en la generación: 15794.385348203143
+Desviación estándar del costo en la generación: 125.67571502960762
+Diversidad promedio: 0.7234629258517034 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 28175.0161
+Tiempo de ejecución de la generación 21: 8.746627569198608
+...................................................................
+...................................................................
+Generación: 22
+Costo promedio: 27567.635600000165
+Varianza del costo en la generación: 2.6800651846718097e-20
+Desviación estándar del costo en la generación: 1.6370904631912708e-10
+Diversidad promedio: 0.0 genes
+Menor costo de toda la generación: 27567.6356
+Mayor costo de toda la generación: 27567.6356
+Tiempo de ejecución de la generación 22: 8.867695331573486
+...................................................................
+--------------------------------------------------------------------
+Tiempo de ejecución para la población #4: 224.02676033973694
+===================================================================
+===================================================================
+Población inicial #5
+Costo promedio inicial 69186.04256679997
+...................................................................
+Generación: 0
+Costo promedio: 62657.467283200065
+Varianza del costo en la generación: 23454366.381687064
+Desviación estándar del costo en la generación: 4842.970821890945
+Diversidad promedio: 16.96686973947896 genes
+Menor costo de toda la generación: 44077.3061
+Mayor costo de toda la generación: 69014.9381
+Tiempo de ejecución de la generación 0: 9.984891653060913
+...................................................................
+...................................................................
+Generación: 1
+Costo promedio: 59087.52624739995
+Varianza del costo en la generación: 17458492.99494482
+Desviación estándar del costo en la generación: 4178.336151501554
+Diversidad promedio: 16.935102204408818 genes
+Menor costo de toda la generación: 43922.5641
+Mayor costo de toda la generación: 64230.1325
+Tiempo de ejecución de la generación 1: 9.755718469619751
+...................................................................
+...................................................................
+Generación: 2
+Costo promedio: 56070.05193540005
+Varianza del costo en la generación: 14630494.86813419
+Desviación estándar del costo en la generación: 3824.9829892607613
+Diversidad promedio: 16.894653306613225 genes
+Menor costo de toda la generación: 38323.893
+Mayor costo de toda la generación: 60599.5458
+Tiempo de ejecución de la generación 2: 9.927108526229858
+...................................................................
+...................................................................
+Generación: 3
+Costo promedio: 53315.31588700006
+Varianza del costo en la generación: 11775532.649111848
+Desviación estándar del costo en la generación: 3431.549598812736
+Diversidad promedio: 16.806613226452907 genes
+Menor costo de toda la generación: 38323.893
+Mayor costo de toda la generación: 57589.749
+Tiempo de ejecución de la generación 3: 10.635895490646362
+...................................................................
+...................................................................
+Generación: 4
+Costo promedio: 51266.66379639993
+Varianza del costo en la generación: 9743785.95652993
+Desviación estándar del costo en la generación: 3121.503797295453
+Diversidad promedio: 16.722829659318638 genes
+Menor costo de toda la generación: 36744.4967
+Mayor costo de toda la generación: 55519.7198
+Tiempo de ejecución de la generación 4: 10.470324039459229
+...................................................................
+...................................................................
+Generación: 5
+Costo promedio: 49452.798283599965
+Varianza del costo en la generación: 8867650.510532323
+Desviación estándar del costo en la generación: 2977.86005556546
+Diversidad promedio: 16.620953907815633 genes
+Menor costo de toda la generación: 36744.4967
+Mayor costo de toda la generación: 52820.7838
+Tiempo de ejecución de la generación 5: 10.32275652885437
+...................................................................
+...................................................................
+Generación: 6
+Costo promedio: 47845.19292100006
+Varianza del costo en la generación: 7390700.067094064
+Desviación estándar del costo en la generación: 2718.584202686035
+Diversidad promedio: 16.44172344689379 genes
+Menor costo de toda la generación: 36744.4967
+Mayor costo de toda la generación: 51298.1888
+Tiempo de ejecución de la generación 6: 10.329090595245361
+...................................................................
+...................................................................
+Generación: 7
+Costo promedio: 46277.19503819998
+Varianza del costo en la generación: 5937453.234700281
+Desviación estándar del costo en la generación: 2436.688990146318
+Diversidad promedio: 16.114645290581162 genes
+Menor costo de toda la generación: 36744.4967
+Mayor costo de toda la generación: 49366.0265
+Tiempo de ejecución de la generación 7: 10.47864556312561
+...................................................................
+...................................................................
+Generación: 8
+Costo promedio: 44922.92646979993
+Varianza del costo en la generación: 5833357.163462639
+Desviación estándar del costo en la generación: 2415.234390998654
+Diversidad promedio: 15.876120240480962 genes
+Menor costo de toda la generación: 34016.1413
+Mayor costo de toda la generación: 47620.2537
+Tiempo de ejecución de la generación 8: 10.244791984558105
+...................................................................
+...................................................................
+Generación: 9
+Costo promedio: 43586.6095382
+Varianza del costo en la generación: 5256621.351079106
+Desviación estándar del costo en la generación: 2292.7322894483573
+Diversidad promedio: 15.611422845691383 genes
+Menor costo de toda la generación: 33328.8318
+Mayor costo de toda la generación: 46179.5469
+Tiempo de ejecución de la generación 9: 10.397497177124023
+...................................................................
+...................................................................
+Generación: 10
+Costo promedio: 42277.75151599997
+Varianza del costo en la generación: 5083060.2862582775
+Desviación estándar del costo en la generación: 2254.564322936535
+Diversidad promedio: 15.4727374749499 genes
+Menor costo de toda la generación: 31054.3438
+Mayor costo de toda la generación: 45054.1412
+Tiempo de ejecución de la generación 10: 10.226346254348755
+...................................................................
+...................................................................
+Generación: 11
+Costo promedio: 41040.24925880003
+Varianza del costo en la generación: 4930167.096410385
+Desviación estándar del costo en la generación: 2220.397959017794
+Diversidad promedio: 15.389290581162324 genes
+Menor costo de toda la generación: 31054.3438
+Mayor costo de toda la generación: 43316.283
+Tiempo de ejecución de la generación 11: 10.541240453720093
+...................................................................
+...................................................................
+Generación: 12
+Costo promedio: 39909.02099100004
+Varianza del costo en la generación: 5441370.000152422
+Desviación estándar del costo en la generación: 2332.6744308094994
+Diversidad promedio: 15.035935871743487 genes
+Menor costo de toda la generación: 31054.3438
+Mayor costo de toda la generación: 42341.2121
+Tiempo de ejecución de la generación 12: 10.26307725906372
+...................................................................
+...................................................................
+Generación: 13
+Costo promedio: 38705.00415059997
+Varianza del costo en la generación: 5406624.5838922905
+Desviación estándar del costo en la generación: 2325.2149543412734
+Diversidad promedio: 14.65493386773547 genes
+Menor costo de toda la generación: 31054.3438
+Mayor costo de toda la generación: 41313.7295
+Tiempo de ejecución de la generación 13: 10.034966707229614
+...................................................................
+...................................................................
+Generación: 14
+Costo promedio: 37480.224961599946
+Varianza del costo en la generación: 4477020.974888917
+Desviación estándar del costo en la generación: 2115.8972032896395
+Diversidad promedio: 14.48378356713427 genes
+Menor costo de toda la generación: 30347.9492
+Mayor costo de toda la generación: 39967.6469
+Tiempo de ejecución de la generación 14: 10.29071044921875
+...................................................................
+...................................................................
+Generación: 15
+Costo promedio: 36365.14563819996
+Varianza del costo en la generación: 4138823.3594803344
+Desviación estándar del costo en la generación: 2034.4098307569038
+Diversidad promedio: 13.886356713426853 genes
+Menor costo de toda la generación: 29841.9745
+Mayor costo de toda la generación: 38483.9347
+Tiempo de ejecución de la generación 15: 10.571537971496582
+...................................................................
+...................................................................
+Generación: 16
+Costo promedio: 35259.87068880001
+Varianza del costo en la generación: 3563874.8005403383
+Desviación estándar del costo en la generación: 1887.822767248117
+Diversidad promedio: 12.57604008016032 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 37666.0556
+Tiempo de ejecución de la generación 16: 9.912720441818237
+...................................................................
+...................................................................
+Generación: 17
+Costo promedio: 34118.44374279999
+Varianza del costo en la generación: 2637762.8286820888
+Desviación estándar del costo en la generación: 1624.1190931339022
+Diversidad promedio: 12.103967935871744 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 36296.8043
+Tiempo de ejecución de la generación 17: 10.105299234390259
+...................................................................
+...................................................................
+Generación: 18
+Costo promedio: 33142.571761399944
+Varianza del costo en la generación: 1876434.1281674886
+Desviación estándar del costo en la generación: 1369.8299632317467
+Diversidad promedio: 11.529146292585171 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 34760.2339
+Tiempo de ejecución de la generación 18: 10.127020359039307
+...................................................................
+...................................................................
+Generación: 19
+Costo promedio: 32136.40686740021
+Varianza del costo en la generación: 1382015.0035712123
+Desviación estándar del costo en la generación: 1175.591342079046
+Diversidad promedio: 10.095519038076151 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 33797.6439
+Tiempo de ejecución de la generación 19: 9.993878841400146
+...................................................................
+...................................................................
+Generación: 20
+Costo promedio: 31366.035737600112
+Varianza del costo en la generación: 685238.1213013815
+Desviación estándar del costo en la generación: 827.7911097018266
+Diversidad promedio: 5.969234468937875 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 32840.6927
+Tiempo de ejecución de la generación 20: 9.7986900806427
+...................................................................
+...................................................................
+Generación: 21
+Costo promedio: 30657.099074800226
+Varianza del costo en la generación: 437438.34531371837
+Desviación estándar del costo en la generación: 661.3912195620065
+Diversidad promedio: 4.361819639278557 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 31319.356
+Tiempo de ejecución de la generación 21: 9.962605237960815
+...................................................................
+...................................................................
+Generación: 22
+Costo promedio: 30163.352379200143
+Varianza del costo en la generación: 372502.03394783975
+Desviación estándar del costo en la generación: 610.3294470594055
+Diversidad promedio: 4.576032064128256 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 31054.3438
+Tiempo de ejecución de la generación 22: 9.771484136581421
+...................................................................
+...................................................................
+Generación: 23
+Costo promedio: 29632.260331000096
+Varianza del costo en la generación: 11023.585213468365
+Desviación estándar del costo en la generación: 104.99326270512962
+Diversidad promedio: 1.2927214428857716 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 29841.9745
+Tiempo de ejecución de la generación 23: 9.512247800827026
+...................................................................
+...................................................................
+Generación: 24
+Costo promedio: 29576.962300000218
+Varianza del costo en la generación: 4.7645603283054394e-20
+Desviación estándar del costo en la generación: 2.1827872842550278e-10
+Diversidad promedio: 0.0 genes
+Menor costo de toda la generación: 29576.9623
+Mayor costo de toda la generación: 29576.9623
+Tiempo de ejecución de la generación 24: 9.835726022720337
+...................................................................
+--------------------------------------------------------------------
+Tiempo de ejecución para la población #5: 253.49427127838135
+===================================================================
+===================================================================
+Tiempo de experimentación: 1371.102725982666
