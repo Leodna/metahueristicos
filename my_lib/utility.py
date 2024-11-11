@@ -291,6 +291,7 @@ def ruleta(poblacion, n=2, mode="max"):
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
     indiv_unicos = poblacion[indices_unicos]
 
+
     if mode == "max":
         # Ordenar por aptitud
         indiv_unicos = ordenar_poblacion(poblacion)
@@ -455,15 +456,16 @@ def seleccion_rank(poblacion, op_cruza=0, mode="max"):
 
 
 def cruce_un_corte(padres):
-    n_cromos = len(padres[0, 2])
-    p1 = padres[0, 2]
-    p2 = padres[1, 2]
+    # Asegurar que los cromosomas de los padres sean cadenas de bits
+    p1 = str(padres[0, 2])  # Convertir el primer padre en cadena si es necesario
+    p2 = str(padres[1, 2])  # Convertir el segundo padre en cadena si es necesario
+    n_cromos = len(p1)  # Longitud de la cadena binaria
 
-    # cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[-int(n_cromos / 2) :]])
-    # cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[-int(n_cromos / 2) :]])
-    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[int(n_cromos / 2) :]])
-    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[int(n_cromos / 2) :]])
+    # Dividir los cromosomas de los padres en dos partes
+    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[int(n_cromos / 2):]])
+    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[int(n_cromos / 2):]])
 
+    # Crear hijos combinando las partes de los padres
     h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
     h2 = f"{cromos_p1[0]}{cromos_p2[1]}"
 
@@ -763,145 +765,92 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0, mode="max"):
 """OPERADORES DE MUTACION"""
 
 
+import numpy as np
+
 def mutation(
     pob,
     indiv_percent=10,
     cromosomas_mutation=None,
     opt=0,
-    operator=0,
     funcion_aptitud=None,
     reverse=True,
 ):
     """
-    Aplica una mutación a una parte de la población original.
+    Aplica una mutación de bits a una parte de la población original.
 
     Parámetros:
     pob (array): La población original que se va a mutar.
-    indiv_percent (int): El porcentaje de la población que se va a mutar. Debe ser un valor entre 0 y 10. (default: 10)
-    cromosomas_mutation (int): La cantidad de genes que se van a mutar en cada individuo. Si no se proporciona, se tomará la mitad de los cromosomas del individuo. (default: None)
-    opt (int): La opción para seleccionar los individuos a mutar. Puede ser 0 (aleatoriedad) o 1 (por aptitud). (default: 0)
-    operator (int): El operador de mutación a utilizar. (default: 0)
-
-    Descripción:
-    La función mutation aplica una mutación a una parte de la población original. Primero, se seleccionan los individuos a mutar según el porcentaje proporcionado y la opción seleccionada. Luego, se aplica la mutación a cada individuo seleccionado utilizando el operador de mutación especificado.
-
-    Validación de errores:
-    La función verifica que el porcentaje de la población a mutar sea mayor a 0 y menor o igual a 10. También verifica que la cantidad de genes a mutar no supere la mitad de los cromosomas del individuo.
-
-    Retorno:
-    La población resultante después de la mutación.
-
-    Notas:
-    * La función mutation modifica la población original, por lo que se recomienda trabajar con una copia de la población original si se desea preservar la población original.
+    indiv_percent (int): El porcentaje de la población que se va a mutar.
+    cromosomas_mutation (int): La cantidad de bits que se van a mutar en cada individuo.
+    opt (int): La opción para seleccionar los individuos a mutar. Puede ser 0 (aleatoriedad) o 1 (por aptitud).
     """
-    # Validación de errores
     tam_pob = pob.shape[0]
-    num_cromos = pob[0][0].shape[0]
-    indiv_percent = int(indiv_percent)
 
-    if indiv_percent <= 0 or indiv_percent > 10:
-        raise ValueError(
-            "El porcentaje de la población a mutar debe ser mayor a 0 y menor o igual a 10."
-        )
+    # Convertir la tercera columna de `pob` en listas de enteros si es una cadena
+    for i in range(tam_pob):
+        if isinstance(pob[i][2], (np.str_, str)):
+            pob[i][2] = [int(bit) for bit in pob[i][2]]  # Convierte la cadena binaria a lista de bits
+
+    # Verificar el formato del individuo
+    if isinstance(pob[0][2], list) and len(pob[0][2]) > 0:
+        num_cromos = len(pob[0][2])
+    else:
+        raise TypeError("El individuo binario en pob[0][2] no tiene el formato esperado.")
 
     if not cromosomas_mutation:
         cromosomas_mutation = num_cromos // 2
-    else:
-        cromosomas_mutation = int(cromosomas_mutation)
-        if cromosomas_mutation > (num_cromos // 2):
-            raise ValueError(
-                "La cantidad de genes a mutar no debe pasar la mitad de los cromosomas del individuo"
-            )
 
-    # Seleccionar individuos a mutar
+    # Selección de individuos a mutar
     indiv_percent /= 100
     n = round(indiv_percent * tam_pob)
-    # opt=0 ----> ALEATORIEDAD
     if opt == 0:
         indices_mutation = np.random.choice(tam_pob, n, replace=False)
-
-    # opt=1 ----> Por aptitud
     else:
         pob = ordenar_poblacion(pob, reverse=not reverse)
         indices_mutation = np.arange(n)
 
+    # Aplicación de mutación de bits y registro de historial
     history = np.zeros((len(indices_mutation), 4), dtype="object")
-    mutate = [heuristic_mutation, mutacion_scramble]
-
+    
     for i, indice in enumerate(indices_mutation):
         individuo = pob[indice]
-        mutante, idx_mutation = mutate[operator](
-            individuo[0], cromosomas_mutation, funcion_aptitud
-        )
-        history[i, 0] = " ".join(str(gen) for gen in individuo[0])
-        history[i, 1] = " ".join(str(gen) for gen in mutante[0])
-        history[i, 2] = idx_mutation
+        
+        # Aplicar mutación de bits
+        mutante, idx_mutation = mutacion_bits(individuo[2], cromosomas_mutation)
+        
+        # Guardar en el historial
+        history[i, 0] = ''.join(str(bit) for bit in individuo[2])  # Antes de mutación
+        history[i, 1] = ''.join(str(bit) for bit in mutante)  # Después de mutación
+        history[i, 2] = idx_mutation  # Índices mutados
         history[i, 3] = cromosomas_mutation
-        # print(
-        #     f"individuo original: {individuo[2]} (apt) {individuo[3]} vs mutante {mutante[2]} (apt) {mutante[3]}"
-        # )
-        pob[indice] = mutante
+
+        # Actualizar el individuo mutado en la población
+        pob[indice][2] = mutante  # Actualiza la lista mutada
 
     return pob, history
 
 
-def heuristic_mutation(
-    individuo, cromosomas_mutation=None, funcion_aptitud=None, reverse=True
-):
+def mutacion_bits(individuo, cromosomas_mutation):
     """
-    Aplica una mutación heurística a un individuo.
-
+    Realiza una mutación de bits en el individuo binario.
+    
     Parámetros:
-    individuo (array): El individuo que se va a mutar.
-    cromosomas_mutation (int): La cantidad de genes que se van a mutar. Si no se proporciona, se tomará la mitad de los cromosomas del individuo. (default: None)
-
-    Descripción:
-    La función heuristic_mutation aplica una mutación heurística a un individuo. Primero, se selecciona un substring del individuo para mutar. Luego, se generan todas las posibles permutaciones del substring y se evalúa la aptitud de cada permutación. Finalmente, se selecciona la permutación con la mayor aptitud y se devuelve como el nuevo individuo mutado.
-
-    Validación de errores:
-    La función verifica que la cantidad de genes a mutar no supere la mitad de los cromosomas del individuo.
-
+    individuo (list): El individuo en formato de lista de bits.
+    cromosomas_mutation (int): Número de bits que se mutarán.
+    
     Retorno:
-    El individuo mutado con la aptitud optima.
+    tuple: El individuo mutado y los índices de los bits mutados.
     """
-    num_cromos = len(individuo)
-    # print("\n")
-    # print(individuo)
+    # Seleccionar índices aleatorios para mutar
+    indices = np.random.choice(len(individuo), cromosomas_mutation, replace=False)
+    
+    # Realizar mutación (flip) en cada índice seleccionado
+    mutante = individuo.copy()
+    for idx in indices:
+        mutante[idx] = 1 - mutante[idx]  # Cambia 0 a 1 y 1 a 0
+    
+    return mutante, indices
 
-    if not cromosomas_mutation:
-        cromosomas_mutation = num_cromos // 2
-    else:
-        cromosomas_mutation = int(cromosomas_mutation)
-        if cromosomas_mutation > (num_cromos // 2):
-            raise ValueError(
-                "La cantidad de genes a mutar no debe pasar la mitad de los cromosomas del individuo"
-            )
-    # obtener substring
-    n = (num_cromos + 1) - cromosomas_mutation
-    idx = np.random.randint(0, n)
-    sublist = individuo[idx : idx + cromosomas_mutation]
-    # print(sublist)
-    # print("\n")
-
-    # Generar posibles soluciones
-    permutations = np.array(list(itertools.permutations(sublist)))
-
-    permutation_pob = np.zeros((permutations.shape[0], 4), dtype="object")
-    # permutation_pob[:,0] = [c.astype(int) for c in permutations]
-
-    for i, p in enumerate(permutations):
-        aux = individuo.copy()
-        aux[idx : idx + cromosomas_mutation] = p
-        permutation_pob[i, 0] = aux
-
-    permutation_apt = funcion_aptitud(permutation_pob)
-    permutation_pob[:, 3] = permutation_apt
-
-    permutation_pob = ordenar_poblacion(permutation_pob, reverse=reverse)
-    permutation_pob[0, 2] = " ".join([chr(c + 64) for c in permutation_pob[0, 0]])
-    # print(permutation_pob)
-
-    return permutation_pob[0], idx
 
 
 def mutacion(individuo, cromosomas_mutation=None):
@@ -1008,6 +957,7 @@ def paro_epsilon(pob, threshold=0.75, majority_th=0.8, mode="max"):
     Retorna:
     - True si se cumple la condición de paro, False en caso contrario
     """
+    opt = 'max'
     if opt == "max":
         porporcion = np.mean(pob[:, 3] > threshold)
     else:
