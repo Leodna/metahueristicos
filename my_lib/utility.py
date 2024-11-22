@@ -1,7 +1,63 @@
 import numpy as np
 import random
+import pickle
+import os
+
 from math import radians, sin, cos, sqrt, atan2
 import itertools
+
+
+def get_poblaciones_iniciales(pob_dir, n=5, tam_pob=100):
+    """
+    Genera y carga las poblaciones iniciales para un algoritmo genético.
+
+    Si el archivo de poblaciones no existe, la función lo crea generando las poblaciones iniciales y guardándolas en el archivo.
+    Si el archivo ya existe, la función lo carga y devuelve las poblaciones.
+
+    Parámetros:
+        n (int): Número de poblaciones iniciales a generar (por defecto, 5).
+        tam_pob (int): Tamaño de cada población (por defecto, 60).
+
+    Valor de retorno:
+        list: Lista de poblaciones iniciales, donde cada población es una matriz de numpy con 4 columnas: ruta, aptitud, individuo y aptitud.
+    """
+    poblaciones = []
+    file_name = f"{n}pobs_{tam_pob}tam.pkl"
+    POB_PATH = os.path.join(pob_dir, file_name)
+    if not os.path.exists(POB_PATH):
+        print("El archivo de poblaciones no existse, creando archivo")
+
+        for i in range(n):
+            recorrido = generar_poblacion_perm(ciudades, tam_pob)
+
+            poblacion = np.zeros((recorrido.shape[0], 4), dtype="object")
+            poblacion[:, 0] = [c.astype(int) for c in recorrido]  # Ruta
+            poblacion[:, 1] = np.ones((recorrido.shape[0]))
+            poblacion[:, 2] = [
+                " ".join([chr(c + 64) for c in perm.astype(int)]) for perm in recorrido
+            ]
+            # poblacion[:, 2] = [individuo_toString(c.astype(int)) for c in recorrido]
+            # poblacion[:, 3] = np.zeros((recorrido.shape[0]))  # Aptitud
+            poblacion[:, 3] = evaluar(poblacion)
+
+            poblaciones.append(poblacion)
+
+        try:
+            with open(POB_PATH, "wb") as f:
+                pickle.dump(poblaciones, f)
+            print("Archivo de poblaciones creado correctamente")
+        except Exception as e:
+            print(f"Error al guardar archivo: {e}")
+
+    else:
+        try:
+            with open(POB_PATH, "rb") as f:
+                poblaciones = pickle.load(f)
+            print("Archivo de poblaciones cargado correctamente")
+        except Exception as e:
+            print(f"Error al cargar archivo: {e}")
+
+    return poblaciones
 
 
 def normalizar(data, a=0, b=1):
@@ -291,7 +347,6 @@ def ruleta(poblacion, n=2, mode="max"):
     _, indices_unicos = np.unique(poblacion[:, 1], return_index=True)
     indiv_unicos = poblacion[indices_unicos]
 
-
     if mode == "max":
         # Ordenar por aptitud
         indiv_unicos = ordenar_poblacion(poblacion)
@@ -462,8 +517,8 @@ def cruce_un_corte(padres):
     n_cromos = len(p1)  # Longitud de la cadena binaria
 
     # Dividir los cromosomas de los padres en dos partes
-    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[int(n_cromos / 2):]])
-    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[int(n_cromos / 2):]])
+    cromos_p1 = np.array([p1[: int(n_cromos / 2)], p1[int(n_cromos / 2) :]])
+    cromos_p2 = np.array([p2[: int(n_cromos / 2)], p2[int(n_cromos / 2) :]])
 
     # Crear hijos combinando las partes de los padres
     h1 = f"{cromos_p2[0]}{cromos_p1[1]}"
@@ -767,6 +822,7 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0, mode="max"):
 
 import numpy as np
 
+
 def mutation(
     pob,
     indiv_percent=10,
@@ -789,13 +845,17 @@ def mutation(
     # Convertir la tercera columna de `pob` en listas de enteros si es una cadena
     for i in range(tam_pob):
         if isinstance(pob[i][2], (np.str_, str)):
-            pob[i][2] = [int(bit) for bit in pob[i][2]]  # Convierte la cadena binaria a lista de bits
+            pob[i][2] = [
+                int(bit) for bit in pob[i][2]
+            ]  # Convierte la cadena binaria a lista de bits
 
     # Verificar el formato del individuo
     if isinstance(pob[0][2], list) and len(pob[0][2]) > 0:
         num_cromos = len(pob[0][2])
     else:
-        raise TypeError("El individuo binario en pob[0][2] no tiene el formato esperado.")
+        raise TypeError(
+            "El individuo binario en pob[0][2] no tiene el formato esperado."
+        )
 
     if not cromosomas_mutation:
         cromosomas_mutation = num_cromos // 2
@@ -811,16 +871,16 @@ def mutation(
 
     # Aplicación de mutación de bits y registro de historial
     history = np.zeros((len(indices_mutation), 4), dtype="object")
-    
+
     for i, indice in enumerate(indices_mutation):
         individuo = pob[indice]
-        
+
         # Aplicar mutación de bits
         mutante, idx_mutation = mutacion_bits(individuo[2], cromosomas_mutation)
-        
+
         # Guardar en el historial
-        history[i, 0] = ''.join(str(bit) for bit in individuo[2])  # Antes de mutación
-        history[i, 1] = ''.join(str(bit) for bit in mutante)  # Después de mutación
+        history[i, 0] = "".join(str(bit) for bit in individuo[2])  # Antes de mutación
+        history[i, 1] = "".join(str(bit) for bit in mutante)  # Después de mutación
         history[i, 2] = idx_mutation  # Índices mutados
         history[i, 3] = cromosomas_mutation
 
@@ -833,24 +893,23 @@ def mutation(
 def mutacion_bits(individuo, cromosomas_mutation):
     """
     Realiza una mutación de bits en el individuo binario.
-    
+
     Parámetros:
     individuo (list): El individuo en formato de lista de bits.
     cromosomas_mutation (int): Número de bits que se mutarán.
-    
+
     Retorno:
     tuple: El individuo mutado y los índices de los bits mutados.
     """
     # Seleccionar índices aleatorios para mutar
     indices = np.random.choice(len(individuo), cromosomas_mutation, replace=False)
-    
+
     # Realizar mutación (flip) en cada índice seleccionado
     mutante = individuo.copy()
     for idx in indices:
         mutante[idx] = 1 - mutante[idx]  # Cambia 0 a 1 y 1 a 0
-    
-    return mutante, indices
 
+    return mutante, indices
 
 
 def mutacion(individuo, cromosomas_mutation=None):
@@ -957,7 +1016,7 @@ def paro_epsilon(pob, threshold=0.75, majority_th=0.8, mode="max"):
     Retorna:
     - True si se cumple la condición de paro, False en caso contrario
     """
-    opt = 'max'
+    opt = "max"
     if opt == "max":
         porporcion = np.mean(pob[:, 3] > threshold)
     else:
