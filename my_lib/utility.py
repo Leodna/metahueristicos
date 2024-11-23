@@ -1,13 +1,137 @@
-import numpy as np
+import os
 import random
 import pickle
-import os
-
-from math import radians, sin, cos, sqrt, atan2
 import itertools
+import numpy as np
+import plotly.graph_objects as go
+
+from plotly.subplots import make_subplots
+from math import radians, sin, cos, sqrt, atan2
 
 
-def get_poblaciones_iniciales(pob_dir, n=5, tam_pob=100):
+def get_report(n_poblacion, poblacion, time=None):
+    info = np.zeros((8))
+    info[0] = n_poblacion
+    info[1] = np.around(np.mean(poblacion[:, 3]), decimals=2)
+    info[2] = np.around(np.var(poblacion[:, 3]), decimals=2)
+    info[3] = np.around(np.std(poblacion[:, 3]), decimals=2)
+    info[4] = np.around(np.min(poblacion[:, 3]), decimals=2)
+    info[5] = np.around(np.max(poblacion[:, 3]), decimals=2)
+    info[6] = np.around(diversity_rate(poblacion), decimals=2)
+    if time:
+        info[7] = time
+
+    return info
+
+
+def intial_stats(pobs, msg):
+    reportes_iniciales = np.array([get_report(i + 1, p) for i, p in enumerate(pobs)])
+    # Comportamiento de las poblaciones iniciales
+    fig = make_subplots(
+        rows=2,
+        cols=3,
+        subplot_titles=[
+            "Costo promedio",
+            "Varianza del costo",
+            "Desviación estándar",
+            "Individuos con menor costo población inicial",
+            "Individuos mayor costo población inicial",
+            "Diversidad de genes",
+        ],
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 1],
+            mode="markers+lines",
+            name="Costo promedio inicial",
+            marker=dict(symbol="star-diamond", size=8),
+        ),
+        row=1,
+        col=1,
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 2],
+            mode="markers+lines",
+            marker=dict(symbol="diamond-x", size=8),
+            name="Varianza costo",
+        ),
+        row=1,
+        col=2,
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 3],
+            mode="markers+lines",
+            marker=dict(symbol="octagon", size=8),
+            name="Desviación costo",
+        ),
+        row=1,
+        col=3,
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 4],
+            mode="markers+lines",
+            marker=dict(symbol="bowtie", size=8),
+            name="Ruta con Menor Distancia",
+        ),
+        row=2,
+        col=1,
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 5],
+            mode="markers+lines",
+            marker=dict(symbol="bowtie", size=8),
+            name="Ruta con Mayor Distancia",
+        ),
+        row=2,
+        col=2,
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=reportes_iniciales[:, 0],
+            y=reportes_iniciales[:, 6],
+            mode="markers+lines",
+            marker=dict(symbol="hexagram", size=8),
+            name="Costo mayor",
+        ),
+        row=2,
+        col=3,
+    )
+
+    fig.update_layout(height=800, width=1600)  # Ajusta el tamaño de la figura
+    # Agrega títulos a los ejes x y y de cada gráfica
+    fig.update_layout(
+        title=f"{msg}",
+        xaxis1=dict(title="número población"),  # Eje x de la primera gráfica
+        yaxis1=dict(title="Costo"),  # Eje y de la primera gráfica
+        xaxis2=dict(title="número población"),  # Eje x de la segunda gráfica
+        yaxis2=dict(title="Costo"),  # Eje y de la segunda gráfica
+        xaxis3=dict(title="número población"),  # Eje x de la tercera gráfica
+        yaxis3=dict(title="Costo"),  # Eje y de la tercera gráfica
+        xaxis4=dict(title="número población"),  # Eje x de la tercera gráfica
+        yaxis4=dict(title="Costo"),  # Eje y de la tercera gráfica
+        xaxis5=dict(title="número población"),  # Eje x de la tercera gráfica
+        yaxis6=dict(title="Genes"),  # Eje y de la tercera gráfica
+    )
+    fig.show()
+
+
+def get_poblaciones_iniciales(
+    pob_dir,
+    ciudades,
+    funcion_evaluar,
+    n=5,
+    tam_pob=100,
+):
     """
     Genera y carga las poblaciones iniciales para un algoritmo genético.
 
@@ -15,6 +139,9 @@ def get_poblaciones_iniciales(pob_dir, n=5, tam_pob=100):
     Si el archivo ya existe, la función lo carga y devuelve las poblaciones.
 
     Parámetros:
+        pob_dir(str): Ruta en donde se almacenará el archivo de poblaciones.
+        ciudades(matrix): Matriz de ciudades con su id y nombre.
+        funcion_evaluar(función): Función para evaluar la aptitud de un individuo
         n (int): Número de poblaciones iniciales a generar (por defecto, 5).
         tam_pob (int): Tamaño de cada población (por defecto, 60).
 
@@ -38,7 +165,7 @@ def get_poblaciones_iniciales(pob_dir, n=5, tam_pob=100):
             ]
             # poblacion[:, 2] = [individuo_toString(c.astype(int)) for c in recorrido]
             # poblacion[:, 3] = np.zeros((recorrido.shape[0]))  # Aptitud
-            poblacion[:, 3] = evaluar(poblacion)
+            poblacion[:, 3] = funcion_evaluar(poblacion)
 
             poblaciones.append(poblacion)
 
