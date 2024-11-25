@@ -331,7 +331,7 @@ def seleccion_ruleta(pob_tam, poblacion, op_cruza=0, mode="max"):
             h1, h2 = cruce_pmx(padres)
         elif op_cruza == 4:
             # Cruza cx
-            h1, h2 = cruce_cx(padres)
+            h1, h2 = cruce_ox(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -664,8 +664,8 @@ def cruce_ox(padres):
     padre1 = np.array(list(padres[0, 0])).astype(int)
     padre2 = np.array(list(padres[1, 0])).astype(int)
 
-    print("Padre 1:", padre1)
-    print("Padre 2:", padre2)
+    #print("Padre 1:", padre1)
+    #print("Padre 2:", padre2)
 
     # Longitud del segmento a cruzar
     size = len(padre1)
@@ -679,8 +679,8 @@ def cruce_ox(padres):
     punto_inicio = np.random.randint(0, size - longitud_segmento + 1)
     punto_fin = punto_inicio + longitud_segmento
 
-    print('Punto de inicio:', punto_inicio)
-    print('Punto final:', punto_fin)
+    #print('Punto de inicio:', punto_inicio)
+    #print('Punto final:', punto_fin)
 
     # Inicializar hijos con valores nulos
     hijo1 = [None] * size
