@@ -276,14 +276,56 @@ def get_distancia(lat1, long1, lat2, long2):
 """OPERADORES DE SELECCIÓN"""
 
 
-def torneo(T):
-    k = len(T)
-    ganador = T[0]
-    for i in range(1, k):
-        print(ganador)
+def torneo(poblacion, k=3, n=2, mode="max"):
+    # Lista para almacenar los padres seleccionados
+    seleccionados = []
+
+    for _ in range(n):
+        # Seleccionar k individuos aleatorios para el torneo
+        indices_torneo = np.random.choice(len(poblacion), size=k, replace=False)
+        participantes = poblacion[indices_torneo]
+
+        if mode == "max":
+            # Seleccionar el individuo con la mayor aptitud
+            ganador = participantes[np.argmax(participantes[:, 3])]
+        else:
+            # Seleccionar el individuo con la menor aptitud
+            ganador = participantes[np.argmin(participantes[:, 3])]
+
+        seleccionados.append(ganador)
+
+    return np.array(seleccionados)
 
 
-# def seleccion_torneo(pob,k,n=1):
+def seleccion_torneo(pob_tam, poblacion, op_cruza=0, k=3, mode="max"):
+    descendencia = []
+    for i in range(pob_tam):
+        # Seleccionar dos padres usando el método de torneo
+        padres = torneo(poblacion, k=k, n=2, mode=mode)
+
+        if op_cruza == 0:
+            # Cruza un corte
+            h1, h2 = cruce_un_corte(padres)
+        elif op_cruza == 1:
+            # Cruza dos cortes
+            h1, h2 = cruce_dos_corte(padres)
+        elif op_cruza == 2:
+            # Cruza homogénea
+            h1, h2 = cruce_homogenea(padres)
+        elif op_cruza == 3:
+            # Cruza PMX
+            h1, h2 = cruce_pmx(padres)
+        elif op_cruza == 4:
+            # Cruza CX
+            h1, h2 = cruce_cx(padres)
+        else:
+            # Cruza homogénea
+            h1, h2 = cruce_homogenea(padres)
+
+        descendencia.append([h1, padres[:, 2]])
+        descendencia.append([h2, padres[:, 2]])
+
+    return descendencia
 
 
 def ruleta(poblacion, n=2, mode="max"):
@@ -331,6 +373,9 @@ def seleccion_ruleta(pob_tam, poblacion, op_cruza=0, mode="max"):
             h1, h2 = cruce_pmx(padres)
         elif op_cruza == 4:
             # Cruza cx
+            h1, h2 = cruce_cx(padres)
+        elif op_cruza == 5:
+            # Cruza ox
             h1, h2 = cruce_ox(padres)
         else:
             # cruza homogenica
@@ -368,6 +413,10 @@ def seleccion_monogamica(poblacion, op_cruza=0):
         elif op_cruza == 4:
             # Cruza cx
             h1, h2 = cruce_cx(padres)
+        elif op_cruza == 5:
+            # Cruza ox
+            h1, h2 = cruce_ox(padres)
+
         else:
             # Cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -405,6 +454,9 @@ def seleccion_poligamica(poblacion, op_cruza=0):
         elif op_cruza == 4:
             # cruza cx
             h1, h2 = cruce_cx(padres)
+        elif op_cruza == 5:
+            # Cruza ox
+            h1, h2 = cruce_ox(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -440,7 +492,11 @@ def seleccion_rank(poblacion, op_cruza=0, mode="max"):
             # cruza  pmx
             h1, h2 = cruce_pmx(padres)
         elif op_cruza == 4:
+            # Cruza cx
             h1, h2 = cruce_cx(padres)
+        elif op_cruza == 5:
+            # Cruza ox
+            h1, h2 = cruce_ox(padres)
         else:
             # cruza homogenica
             h1, h2 = cruce_homogenea(padres)
@@ -659,13 +715,14 @@ def cruce_cx(padres):
 
     return np.array(hijo1), np.array(hijo2)
 
+
 def cruce_ox(padres):
     # Extraer los padres del argumento
     padre1 = np.array(list(padres[0, 0])).astype(int)
     padre2 = np.array(list(padres[1, 0])).astype(int)
 
-    #print("Padre 1:", padre1)
-    #print("Padre 2:", padre2)
+    # print("Padre 1:", padre1)
+    # print("Padre 2:", padre2)
 
     # Longitud del segmento a cruzar
     size = len(padre1)
@@ -673,14 +730,16 @@ def cruce_ox(padres):
 
     # Validación de la longitud del segmento
     if longitud_segmento > size:
-        raise ValueError("La longitud del segmento no puede ser mayor que el tamaño del padre.")
+        raise ValueError(
+            "La longitud del segmento no puede ser mayor que el tamaño del padre."
+        )
 
     # Calcular puntos aleatorios garantizando que punto_fin > punto_inicio
     punto_inicio = np.random.randint(0, size - longitud_segmento + 1)
     punto_fin = punto_inicio + longitud_segmento
 
-    #print('Punto de inicio:', punto_inicio)
-    #print('Punto final:', punto_fin)
+    # print('Punto de inicio:', punto_inicio)
+    # print('Punto final:', punto_fin)
 
     # Inicializar hijos con valores nulos
     hijo1 = [None] * size
@@ -703,9 +762,12 @@ def cruce_ox(padres):
 
     # Validar que no hay duplicados ni elementos faltantes
     if len(set(hijo1)) != size or len(set(hijo2)) != size:
-        raise ValueError("Los hijos generados contienen duplicados o elementos faltantes.")
-    
+        raise ValueError(
+            "Los hijos generados contienen duplicados o elementos faltantes."
+        )
+
     return hijo1, hijo2
+
 
 # def cruce_cx(padres):
 #     """
@@ -801,6 +863,13 @@ def get_next_gen(poblacion, op_seleccion, op_cruza=0, mode="max"):
     elif op_seleccion == 3:
         # Selección por ranking
         return seleccion_rank(poblacion, op_cruza=op_cruza, mode=mode)
+    elif op_seleccion == 4:
+        # Selección por torneo
+        # Número de parejas por reproducir
+        n = int(len(poblacion) / 2)
+        return seleccion_torneo(
+            pob_tam=n, poblacion=poblacion, op_cruza=op_cruza, mode=mode
+        )
     else:
         # TO-DO implementar todo el metodo de selección por
         # Torneo
