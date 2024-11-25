@@ -659,6 +659,53 @@ def cruce_cx(padres):
 
     return np.array(hijo1), np.array(hijo2)
 
+def cruce_ox(padres):
+    # Extraer los padres del argumento
+    padre1 = np.array(list(padres[0, 0])).astype(int)
+    padre2 = np.array(list(padres[1, 0])).astype(int)
+
+    print("Padre 1:", padre1)
+    print("Padre 2:", padre2)
+
+    # Longitud del segmento a cruzar
+    size = len(padre1)
+    longitud_segmento = 5  # Longitud fija del segmento
+
+    # Validación de la longitud del segmento
+    if longitud_segmento > size:
+        raise ValueError("La longitud del segmento no puede ser mayor que el tamaño del padre.")
+
+    # Calcular puntos aleatorios garantizando que punto_fin > punto_inicio
+    punto_inicio = np.random.randint(0, size - longitud_segmento + 1)
+    punto_fin = punto_inicio + longitud_segmento
+
+    print('Punto de inicio:', punto_inicio)
+    print('Punto final:', punto_fin)
+
+    # Inicializar hijos con valores nulos
+    hijo1 = [None] * size
+    hijo2 = [None] * size
+
+    # Copiar el segmento seleccionado de un padre al otro hijo
+    hijo1[punto_inicio:punto_fin] = padre2[punto_inicio:punto_fin]
+    hijo2[punto_inicio:punto_fin] = padre1[punto_inicio:punto_fin]
+
+    # Rellenar los hijos con los elementos restantes en orden
+    def rellenar_hijo(hijo, padre_base, punto_fin):
+        idx = punto_fin
+        for elem in padre_base:
+            if elem not in hijo:
+                hijo[idx % size] = elem
+                idx += 1
+
+    rellenar_hijo(hijo1, padre1, punto_fin)
+    rellenar_hijo(hijo2, padre2, punto_fin)
+
+    # Validar que no hay duplicados ni elementos faltantes
+    if len(set(hijo1)) != size or len(set(hijo2)) != size:
+        raise ValueError("Los hijos generados contienen duplicados o elementos faltantes.")
+    
+    return hijo1, hijo2
 
 # def cruce_cx(padres):
 #     """
