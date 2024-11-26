@@ -318,6 +318,9 @@ def seleccion_torneo(pob_tam, poblacion, op_cruza=0, k=3, mode="max"):
         elif op_cruza == 4:
             # Cruza CX
             h1, h2 = cruce_cx(padres)
+        elif op_cruza == 5:
+            # Cruza OX
+            h1, h2 = cruce_ox(padres)
         else:
             # Cruza homogénea
             h1, h2 = cruce_homogenea(padres)
